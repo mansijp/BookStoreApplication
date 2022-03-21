@@ -8,6 +8,6 @@
  *
  * @author mansi
  */
-public class Store {
+public class NoUserState {
     
 }
