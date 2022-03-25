@@ -9,5 +9,7 @@
  * @author husam
  */
 public class Customer {
-    
+    int points;
+    String name;
+    String status;
 }
