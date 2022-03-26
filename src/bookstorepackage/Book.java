@@ -1,3 +1,5 @@
+package bookstorepackage;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,10 +8,11 @@
 
 /**
  *
- * @author husam
+ * @author Mansi
  */
-public class Customer {
-    int points;
-    String name;
-    String status;
+public class Book {
+    
+    public Book (String bookname, double bookprice){
+        
+    }
 }

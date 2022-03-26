@@ -1,3 +1,5 @@
+package bookstorepackage;
+
 
 import javafx.scene.layout.Pane;
 
@@ -19,7 +21,10 @@ public class CustomerState{
     public CustomerState(MainClass main){
         this.main = main;
         CustomerStartScreen screen = new CustomerStartScreen(this);
-        customer = new Customer();
+        
+        String name = "name";
+        String password = "password";
+        customer = new Customer(name, password);
         changeScreen(screen.display(customer));
     }
     
@@ -38,7 +43,7 @@ public class CustomerState{
     }
     
     public String getStatus(){
-        if(customer.points < 1000)
+        if(customer.customerPoints < 1000)
             return "Silver";
         return "Gold";
     }

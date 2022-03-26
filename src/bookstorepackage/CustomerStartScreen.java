@@ -1,3 +1,4 @@
+package bookstorepackage;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,9 +39,9 @@ public class CustomerStartScreen {
     
     public Pane display(Customer customer){
         Text welcomeText = new Text();
-        welcomeText.setText("Welcome " + customer.name 
-                + ". You have " + customer.points + " points. "
-                + "Your status is " + customer.status
+        welcomeText.setText("Welcome " + customer.customerName 
+                + ". You have " + customer.customerPoints + " points. "
+                + "Your status is " + customer.customerStatus
         );
         
         //table with three columns,

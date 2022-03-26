@@ -1,3 +1,5 @@
+package bookstorepackage;
+
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -28,8 +30,8 @@ public class CustomerCostScreen {
         totalCostText.setText("Total Cost: ");
         
         Text pointsText = new Text();
-        pointsText.setText("Points: " + customer.points 
-                + ", Status:" + customer.status);
+        pointsText.setText("Points: " + customer.customerPoints 
+                + ", Status:" + customer.customerStatus);
         
         Button logoutButton = new Button();
         logoutButton.setText("Logout");
