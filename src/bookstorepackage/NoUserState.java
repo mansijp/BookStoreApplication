@@ -19,13 +19,14 @@ public class NoUserState extends StoreState {
     
     protected NoUserState(Main3 m){
         main = m;
-        LoginScreen screen = new LoginScreen(m);
+        LoginScreen screen = new LoginScreen(this);
     }
     
     public void login(Store store, String username, String password, Pane root){
                 
         if(username.equals("admin") && password.equals("admin")){
             store.state = (OwnerState) store.state;
+            main.changeScreen(root);
             
         } else {
             
@@ -37,5 +38,9 @@ public class NoUserState extends StoreState {
             }
             
         }
+    }
+    
+    public void changeScreen(Pane root){
+        main.changeScreen(root);
     }
 }

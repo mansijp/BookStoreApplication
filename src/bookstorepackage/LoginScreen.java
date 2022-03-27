@@ -5,14 +5,12 @@
  */
 package bookstorepackage;
 
-import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 /**
@@ -21,53 +19,43 @@ import javafx.stage.Stage;
  */
 
 
-public class LoginScreen extends Application {
-    private Main3 main;
+public class LoginScreen {
     
-    public LoginScreen(Main3 m){
-        main = m;
+    private NoUserState noUser;
+    
+    public LoginScreen(NoUserState noUser){
+        this.noUser = noUser;   //combined classes for easy access
     }
-    
-    @Override
-    public void start(Stage primaryStage, CustomerStartScreen store) {
+
+    public void start(Stage primaryStage, Store store) {
         
         // grid
-        GridPane loginPane = new GridPane();
-        
-        // alignmentand position
-        loginPane.setHgap(50);
-        loginPane.setVgap(50);
-        
-        // elements
-        Button loginBtn = new Button("Login");
-        loginBtn.setDefaultButton(false);
-        if(loginBtn.isArmed()){ 
-            loginBtn.setOnAction(new EventHandler<ActionEvent>(){
-                @Override public void handle(ActionEvent e){
-                    Stage stage = new Stage();
-                    stage.changeScreen(root);
-                    stage.show();
-                }
-            });
-            loginBtn.disarm();
-        }
+        StackPane loginPane = new StackPane();
         
         // scene
-        Scene scene = new Scene(loginPane, 500, 500, Color.rgb(100, 100, 100));
+        Scene scene = new Scene(loginPane, 500, 500, Color.LIGHTGRAY);
+
+        // alignment and position
+        loginPane.setAlignment(Pos.CENTER);
         
-        primaryStage.setTitle("Hello World!");
+        // Table
+        
+
+        // button
+        Button loginBtn = new Button("Login");
+        loginBtn.setDefaultButton(false);
+        loginBtn.setOnAction((ActionEvent e) -> {
+            if(store.state instanceof OwnerState){
+                noUser.changeScreen(loginPane); // owner screen
+            } else if(store.state instanceof CustomerState){
+                noUser.changeScreen(loginPane); // customer screen
+            }
+        });
+        
+        primaryStage.setTitle("Login Screen");
         primaryStage.setScene(scene);
         primaryStage.show();
-    }
-    
-    
-    // Button ActionEvent
-    public void Login(Store store){
-        if(store.state instanceof OwnerState){
-            
-        } else if(store.state instanceof CustomerState){
-            
-        }
+        
     }
 
     public static void main(String[] args) {

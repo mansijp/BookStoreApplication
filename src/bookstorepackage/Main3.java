@@ -22,15 +22,15 @@ public class Main3 extends Application{
     
     @Override
     public void start(Stage primaryStage) {  
-        StackPane root = new StackPane();
+        StackPane loginRoot = new StackPane();
 
-        scene = new Scene(root, 500, 500);
+        scene = new Scene(loginRoot, 500, 500);
 
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
         
-        //NoUserState defaultState = new NoUserState(this);
+        NoUserState defaultState = new NoUserState(this);
     }
     
     public void changeScreen(Pane root){
