@@ -11,24 +11,31 @@ package bookstorepackage;
  * @author mansi
  */
 
-import java.util.ArrayList;
+import javafx.scene.layout.Pane;
         
 public class NoUserState extends StoreState {
     
-    private NoUserState(){}
+    private Main3 main;
     
-    public void login(Store store, String username, String password){
+    protected NoUserState(Main3 m){
+        main = m;
+        LoginScreen screen = new LoginScreen(m);
+    }
+    
+    public void login(Store store, String username, String password, Pane root){
                 
         if(username.equals("admin") && password.equals("admin")){
             store.state = (OwnerState) store.state;
             
         } else {
+            
             for(Customer customer: store.customers){
                 if(customer.customerName.equals(username) && customer.customerPassword.equals(password)){
                     store.state = (CustomerState) store.state;
-                    // Aaron needs to extend the CustomerState.java class to be a child of StoreState
+                    main.changeScreen(root);
                 }
             }
+            
         }
     }
 }

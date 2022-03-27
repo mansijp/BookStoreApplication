@@ -13,7 +13,7 @@ import javafx.scene.layout.Pane;
  *
  * @author aaron
  */
-public class CustomerState{
+public class CustomerState extends StoreState{
     private Customer customer;
     private MainClass main;
     

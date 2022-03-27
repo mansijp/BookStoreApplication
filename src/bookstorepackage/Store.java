@@ -17,23 +17,23 @@ public class Store {
     protected StoreState state = null;
     
     // Constructor
-    private Store(){    }
+    protected Store(){    }
     
     // Methods
-   /* public void setState(StoreState state){
-        this.state = state;
-        this.loadData();
-    }
-    public StoreState getState(){
-        return state;
-    }
-    
+   /* 
     public void loadData(){
-         
+        
     }
     
     public void saveData(){
          
-    }*/
+    }
+    */
+    public void main(String[] args){
+        
+        Store bookstoreApplication = new Store();
+        //bookstoreApplication.launch();
+        
+    }
      
 }
