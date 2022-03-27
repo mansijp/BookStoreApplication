@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bookstorepackage;
+
 import java.util.ArrayList;
 
 /**
@@ -34,6 +34,9 @@ public class Store {
         Store bookstoreApplication = new Store();
         //bookstoreApplication.launch();
         
+    }
+
+    void setState(StoreState st) {
     }
      
 }

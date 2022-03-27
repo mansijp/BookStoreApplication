@@ -9,7 +9,7 @@
  * @author Cyrille
  */
 
-package bookstorepackage;
+
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
@@ -17,17 +17,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.util.Callback;
 
 
@@ -57,7 +51,7 @@ public class OwnerState extends StoreState{
         System.out.println("Already logged In");
     }
     public void logOut(Store store){
-        StoreState st = new NoUserState();
+        StoreState st = new NoUserState(new Main3());
         store.setState(st);
     }
     public void addBook(Store store, Book book){
