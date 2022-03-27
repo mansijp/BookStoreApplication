@@ -139,7 +139,7 @@ public class OwnerState extends StoreState{
         customerPointsCol.setCellValueFactory(new PropertyValueFactory("customerPoints"));
         customerPointsCol.setCellValueFactory(new Callback<CellDataFeatures<Customer, Integer>, ObservableValue<Integer>>(){
             public ObservableValue<Integer> call(CellDataFeatures<Customer, Integer> str){
-                return new ReadOnlyObjectWrapper(str.getValue().customerName);
+                return new ReadOnlyObjectWrapper(str.getValue().customerPoints);
             }
         });
 
