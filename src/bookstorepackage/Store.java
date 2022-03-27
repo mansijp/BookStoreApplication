@@ -12,13 +12,15 @@ import java.util.ArrayList;
  */
 
 public class Store {
-    static ArrayList <Book> books =  new ArrayList<>();
-    static ArrayList <Customer> customers =  new ArrayList<>();
-    StoreState state= null;
-    public Store(){
-        
-    }
-    public void setState(StoreState state){
+    protected ArrayList <Book> books =  new ArrayList<>();
+    protected ArrayList <Customer> customers =  new ArrayList<>();
+    protected StoreState state = null;
+    
+    // Constructor
+    private Store(){    }
+    
+    // Methods
+   /* public void setState(StoreState state){
         this.state = state;
         this.loadData();
     }
@@ -29,8 +31,9 @@ public class Store {
     public void loadData(){
          
     }
+    
     public void saveData(){
          
-    }
+    }*/
      
 }

@@ -12,7 +12,11 @@ package bookstorepackage;
  */
 public class Book {
     
+    private String name;
+    private double price;
+    
     public Book (String bookname, double bookprice){
-        
+        name = bookname;
+        price = bookprice;
     }
 }
