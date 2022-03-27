@@ -29,6 +29,9 @@ public class Store {
          
     }
     */
+    public void setState(StoreState state){
+        this.state = state;
+    }
     public void main(String[] args){
         
         Store bookstoreApplication = new Store();

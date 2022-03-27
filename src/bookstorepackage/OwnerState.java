@@ -56,8 +56,9 @@ public class OwnerState extends StoreState{
     public void logIn(){
         System.out.println("Already logged In");
     }
+    Main3 m = new Main3();
     public void logOut(Store store){
-        StoreState st = new NoUserState();
+        StoreState st = new NoUserState(m);
         store.setState(st);
     }
     public void addBook(Store store, Book book){
