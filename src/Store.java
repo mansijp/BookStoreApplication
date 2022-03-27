@@ -39,7 +39,5 @@ public class Store {
         
     }
 
-    void setState(StoreState st) {
-    }
      
 }
