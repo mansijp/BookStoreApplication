@@ -26,6 +26,7 @@ public class NoUserState extends StoreState {
             for(Customer customer: store.customers){
                 if(customer.customerName.equals(username) && customer.customerPassword.equals(password)){
                     store.state = (CustomerState) store.state;
+                    // Aaron needs to extend the CustomerState.java class to be a child of StoreState
                 }
             }
         }
