@@ -21,32 +21,28 @@ public class Main3 extends Application{
 
     private Scene scene;
     
-    public void start(Stage primaryStage, Store store) {  
+    public void start(Stage primaryStage) {  
         StackPane loginRoot = new StackPane();
         // alignment and position
         loginRoot.setAlignment(Pos.CENTER);
 
         scene = new Scene(loginRoot, 500, 500);
-
+        Store store = new Store();
+        
         primaryStage.setTitle("Login Screen");
         primaryStage.setScene(scene);
         primaryStage.show();
         
         NoUserState defaultState = new NoUserState();
-        changeScreen(defaultState.loginScreen(primaryStage, store));
+        changeScreen(defaultState.loginScreen(store));
     }
     
-    public void changeScreen(Pane root){
-        scene.setRoot(root);       
+    public void changeScreen(Pane loginScreen){
+        scene.setRoot(loginScreen);       
     }
     public static void main(String[] args) {
         launch(args);
     }
     
     // combine login screen and nouserstate classes
-
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
