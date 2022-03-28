@@ -37,12 +37,16 @@ public class OwnerState extends StoreState{
     private String username = "admin";
     private String password = "admin";
     
-    private OwnerState(){
-        
+    public OwnerState(Store store){
+        super(store);
     }
+    
+    //private OwnerState(){
+        
+    //}
     public static OwnerState getInstance(){
         if (s == null){
-            s = new OwnerState();
+            s = new OwnerState(new Store());
         }
         return s;
     }
@@ -52,7 +56,7 @@ public class OwnerState extends StoreState{
     }
     Main3 m = new Main3();
     public void logOut(Store store){
-        StoreState st = new NoUserState(m);
+        StoreState st = new NoUserState(store);
         store.setState(st);
     }
     public void addBook(Store store, Book book){

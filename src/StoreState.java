@@ -10,5 +10,9 @@
  * @author Husam
  */
 public abstract class StoreState {
+    protected Store store;
     
+    public StoreState(Store store){
+        this.store = store;
+    }
 }

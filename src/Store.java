@@ -1,23 +1,35 @@
+
+import java.util.ArrayList;
+import javafx.application.Application;
+import static javafx.application.Application.launch;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-import java.util.ArrayList;
+
 
 /**
  *
  * @author Mansi
  */
 
-public class Store {
+public class Store extends Application{
+    private Scene scene;
     protected ArrayList <Book> books =  new ArrayList<>();
     protected ArrayList <Customer> customers =  new ArrayList<>();
     protected StoreState state = null;
     
     // Constructor
-    protected Store(){    }
+    public Store(){
+        setState(new NoUserState(this));
+    }
     
     // Methods
    /* 
@@ -29,14 +41,20 @@ public class Store {
          
     }
     */
-    public void setState(StoreState state){
-        this.state = state;
+    
+    public void start(Stage primaryStage) {  
+        StackPane root = new StackPane();
+
+        scene = new Scene(root, 500, 500);
+
+        primaryStage.setTitle("Hello World!");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
-    public void main(String[] args){
-        
+    
+    public static void main(String[] args){
         Store bookstoreApplication = new Store();
-        //bookstoreApplication.launch();
-        
+        launch(args);
     }
 
     /*void setState(StoreState st) {
@@ -44,4 +62,12 @@ public class Store {
     
     // set states in this class and don't typecast the state variable
      
+        public void setState(StoreState state){
+        this.state = state;
+    }
+    
+    public void changeScreen(Pane root){
+        scene.setRoot(root);
+    }
+    
 }

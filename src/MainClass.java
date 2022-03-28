@@ -24,7 +24,7 @@ public class MainClass extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
         
-        CustomerState state = new CustomerState(this);
+        //CustomerState state = new CustomerState(this);
     }
     
     public static void main(String[] args) {
