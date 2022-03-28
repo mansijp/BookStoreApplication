@@ -39,7 +39,9 @@ public class Store {
         
     }
 
-    void setState(StoreState st) {
-    }
+    /*void setState(StoreState st) {
+    }*/
+    
+    // set states in this class and don't typecast the state variable
      
 }

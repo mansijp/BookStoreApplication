@@ -39,4 +39,6 @@ public class Main3 extends Application{
     public static void main(String[] args) {
         launch(args);
     }
+    
+    // combine login screen and nouserstate classes
 }
