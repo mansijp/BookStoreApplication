@@ -52,7 +52,7 @@ public class OwnerState extends StoreState{
     }
     Main3 m = new Main3();
     public void logOut(Store store){
-        StoreState st = new NoUserState(m);
+        StoreState st = new NoUserState();
         store.setState(st);
     }
     public void addBook(Store store, Book book){

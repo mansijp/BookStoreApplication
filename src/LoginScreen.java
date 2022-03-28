@@ -46,9 +46,9 @@ public class LoginScreen {
         loginBtn.setDefaultButton(false);
         loginBtn.setOnAction((ActionEvent e) -> {
             if(store.state instanceof OwnerState){
-                noUser.changeScreen(loginPane); // owner screen
+                //noUser.changeScreen(loginPane); // owner screen
             } else if(store.state instanceof CustomerState){
-                noUser.changeScreen(loginPane); // customer screen
+                //noUser.changeScreen(loginPane); // customer screen
             }
         });
         

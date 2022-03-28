@@ -7,6 +7,7 @@
 
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -20,17 +21,19 @@ public class Main3 extends Application{
 
     private Scene scene;
     
-    @Override
-    public void start(Stage primaryStage) {  
+    public void start(Stage primaryStage, Store store) {  
         StackPane loginRoot = new StackPane();
+        // alignment and position
+        loginRoot.setAlignment(Pos.CENTER);
 
         scene = new Scene(loginRoot, 500, 500);
 
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Login Screen");
         primaryStage.setScene(scene);
         primaryStage.show();
         
-        NoUserState defaultState = new NoUserState(this);
+        NoUserState defaultState = new NoUserState();
+        changeScreen(defaultState.loginScreen(primaryStage, store));
     }
     
     public void changeScreen(Pane root){
@@ -41,4 +44,9 @@ public class Main3 extends Application{
     }
     
     // combine login screen and nouserstate classes
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
