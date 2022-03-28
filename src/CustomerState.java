@@ -36,11 +36,7 @@ public class CustomerState extends StoreState{
         String password = "password";
         customer = new Customer(name, password);
         
-        changeScreen(customerCostScreen());
-    }
-    
-    public void changeScreen(Pane root){
-        store.changeScreen(root);
+        store.changeScreen(customerStartScreen());
     }
     
     public void logout(){
@@ -86,7 +82,7 @@ public class CustomerState extends StoreState{
     }
     
     private ObservableList<BookListing> getBooks(){
-        books = FXCollections.observableArrayList();
+        ObservableList<BookListing> books = FXCollections.observableArrayList();
         
         for(int i = 0; i < 20; i++)
             books.add(new BookListing("harry potter " + i, 200));
@@ -105,7 +101,7 @@ public class CustomerState extends StoreState{
         // book name, book price, select.
         // TableView<S>
         TableView<BookListing> bookTable = new TableView<>();
-        ObservableList<BookListing> books = getBooks();
+        books = getBooks();
         bookTable.setItems(books);
         
         TableColumn<BookListing,String> bookNameCol = new TableColumn<>("Book Name");
@@ -146,11 +142,11 @@ public class CustomerState extends StoreState{
         root.setAlignment(Pos.TOP_CENTER);
         
         buyButton.setOnAction(event -> {
-            changeScreen(customerCostScreen());
+            store.changeScreen(customerCostScreen());
         });
         
         buyWithPointsButton.setOnAction(event -> {
-            changeScreen(customerCostScreen());
+            store.changeScreen(customerCostScreen());
         });
         
         logoutButton.setOnAction(event -> {

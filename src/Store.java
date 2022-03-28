@@ -27,9 +27,7 @@ public class Store extends Application{
     protected StoreState state = null;
     
     // Constructor
-    public Store(){
-        setState(new NoUserState(this));
-    }
+    public Store(){ }
     
     // Methods
    /* 
@@ -50,24 +48,21 @@ public class Store extends Application{
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
+        
+        Store bookstoreApplication = new Store();
+        setState(new CustomerState(this));
     }
     
     public static void main(String[] args){
-        Store bookstoreApplication = new Store();
         launch(args);
     }
 
-    /*void setState(StoreState st) {
-    }*/
-    
     // set states in this class and don't typecast the state variable
-     
-        public void setState(StoreState state){
+    public void setState(StoreState state){
         this.state = state;
     }
     
     public void changeScreen(Pane root){
         scene.setRoot(root);
     }
-    
 }
