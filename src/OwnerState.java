@@ -39,6 +39,7 @@ public class OwnerState extends StoreState{
     
     public OwnerState(Store store){
         super(store);
+        store.changeScreen(ownerStartScreen());
     }
     
     //private OwnerState(){
