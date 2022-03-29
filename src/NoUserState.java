@@ -24,7 +24,6 @@ public class NoUserState extends StoreState {
     
     protected NoUserState(Store store){
         super(store);
-        //LoginScreen screen = new LoginScreen(this);
     }
     
     public void login(Store store, String username, String password, Pane root){
@@ -69,10 +68,11 @@ public class NoUserState extends StoreState {
     }
         
 
+    @Override
     public Pane logInScreen(){
        
         Label namelabel = new Label ("UserName");
-        TextField namefield = new TextField("Enter your Username");
+        TextField namefield = new TextField("username");
         Label pwrdlabel = new Label ("Password");
         TextField passwordField = new PasswordField();
         passwordField.setText("password");
@@ -91,8 +91,4 @@ public class NoUserState extends StoreState {
        
         return loginstart;
     }
-    
-//    public void changeScreen(Pane root){
-//        store.changeScreen(root);
-//    }
 }

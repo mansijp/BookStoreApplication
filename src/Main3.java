@@ -34,7 +34,7 @@ public class Main3 extends Application{
         primaryStage.show();
         
         NoUserState defaultState = new NoUserState(store);
-        changeScreen(defaultState.loginScreen(store));
+        changeScreen(defaultState.logInScreen());
         //NoUserState defaultState = new NoUserState(this);
     }
     
@@ -44,6 +44,4 @@ public class Main3 extends Application{
     public static void main(String[] args) {
         launch(args);
     }
-    
-    // combine login screen and nouserstate classes
 }
