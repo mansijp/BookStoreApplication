@@ -30,7 +30,7 @@ public class Main3 extends Application{
         primaryStage.setScene(scene);
         primaryStage.show();
         
-        NoUserState defaultState = new NoUserState(this);
+        //NoUserState defaultState = new NoUserState(this);
     }
     
     public void changeScreen(Pane root){
@@ -39,4 +39,6 @@ public class Main3 extends Application{
     public static void main(String[] args) {
         launch(args);
     }
+    
+    // combine login screen and nouserstate classes
 }
