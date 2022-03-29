@@ -43,7 +43,7 @@ public class Store extends Application{
     public void start(Stage primaryStage) {  
         StackPane root = new StackPane();
 
-        scene = new Scene(root, 500, 500);
+        scene = new Scene(root, 800, 500);
 
         primaryStage.setTitle("Book Store");
         primaryStage.setScene(scene);
