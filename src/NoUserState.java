@@ -21,6 +21,11 @@ public class NoUserState extends StoreState {
     
     protected NoUserState(){
         
+public class NoUserState extends StoreState {
+    
+    protected NoUserState(Store store){
+        super(store);
+        //LoginScreen screen = new LoginScreen(this);
     }
     
     public void login(Store store, String username, String password, Pane root){
@@ -28,13 +33,14 @@ public class NoUserState extends StoreState {
         /*if(username.equals("admin") && password.equals("admin")){
             store.state = (OwnerState) store.state;
             //changeScreen(root);
+            store.changeScreen(root);
             
         } else {
             
             for(Customer customer: store.customers){
                 if(customer.customerName.equals(username) && customer.customerPassword.equals(password)){
                     store.state = (CustomerState) store.state;
-                    //changeScreen(root);
+                    store.changeScreen(root);
                 }
             }
             
@@ -62,5 +68,30 @@ public class NoUserState extends StoreState {
         
         return vbox;
         
+    public Pane logInScreen(){
+       
+        Label namelabel = new Label ("UserName");
+        TextField namefield = new TextField("Enter your Username");
+        Label pwrdlabel = new Label ("Password");
+        TextField passwordField = new PasswordField();
+        passwordField.setText("password");
+
+        HBox logindata = new HBox(20);
+        logindata.setAlignment(Pos.CENTER);
+        logindata.getChildren().addAll(namelabel, namefield,pwrdlabel,passwordField);
+        
+        Button loginButton = new Button();
+        loginButton.setText("LogIn");
+
+        VBox loginstart = new VBox(20);
+        loginstart.setAlignment(Pos.CENTER);
+        loginstart.getChildren().add(logindata);
+        loginstart.getChildren().add(loginButton);
+       
+        return loginstart;
     }
+    
+//    public void changeScreen(Pane root){
+//        store.changeScreen(root);
+//    }
 }

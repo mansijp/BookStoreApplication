@@ -37,12 +37,16 @@ public class OwnerState extends StoreState{
     private String username = "admin";
     private String password = "admin";
     
-    private OwnerState(){
-        
+    public OwnerState(Store store){
+        super(store);
     }
+    
+    //private OwnerState(){
+        
+    //}
     public static OwnerState getInstance(){
         if (s == null){
-            s = new OwnerState();
+            s = new OwnerState(new Store());
         }
         return s;
     }
@@ -52,7 +56,7 @@ public class OwnerState extends StoreState{
     }
 
     public void logOut(Store store){
-        StoreState st = new NoUserState();
+        StoreState st = new NoUserState(store);
         store.setState(st);
     }
     public void addBook(Store store, Book book){
@@ -65,13 +69,23 @@ public class OwnerState extends StoreState{
     public void registerNewCustomer(Store store,String name, String password){
         Customer customer = new Customer(name, password);
         boolean found = false;
-        while (found==false){
-            for(Customer cst:store.customers){
+        int size = store.customers.size();
+        int i = 0;
+        while ((found==false) && (i<size)){
+            Customer cst= store.customers.get(i);
+            if((cst.customerName.equals(name))&&(cst.customerPassword.equals(password))){
+                    found = true;
+                    System.out.println("Customer already in Store Customers list");
+                    i = size + 1;
+                }
+            
+            /*for(Customer cst:store.customers){
                 if((cst.customerName.equals(name))&&(cst.customerPassword.equals(password))){
                     found = true;
                     System.out.println("Customer already in Store Customers list");
                 }
-            }
+            } */
+            
         }
         if(found==false){
             store.customers.add(customer);

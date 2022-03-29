@@ -35,6 +35,7 @@ public class Main3 extends Application{
         
         NoUserState defaultState = new NoUserState();
         changeScreen(defaultState.loginScreen(store));
+        //NoUserState defaultState = new NoUserState(this);
     }
     
     public void changeScreen(Pane loginScreen){
