@@ -65,13 +65,23 @@ public class OwnerState extends StoreState{
     public void registerNewCustomer(Store store,String name, String password){
         Customer customer = new Customer(name, password);
         boolean found = false;
-        while (found==false){
-            for(Customer cst:store.customers){
+        int size = store.customers.size();
+        int i = 0;
+        while ((found==false) && (i<size)){
+            Customer cst= store.customers.get(i);
+            if((cst.customerName.equals(name))&&(cst.customerPassword.equals(password))){
+                    found = true;
+                    System.out.println("Customer already in Store Customers list");
+                    i = size + 1;
+                }
+            
+            /*for(Customer cst:store.customers){
                 if((cst.customerName.equals(name))&&(cst.customerPassword.equals(password))){
                     found = true;
                     System.out.println("Customer already in Store Customers list");
                 }
-            }
+            } */
+            
         }
         if(found==false){
             store.customers.add(customer);
