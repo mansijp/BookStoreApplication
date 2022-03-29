@@ -26,7 +26,7 @@ public class Main3 extends Application{
         // alignment and position
         loginRoot.setAlignment(Pos.CENTER);
 
-        scene = new Scene(loginRoot, 500, 500);
+        scene = new Scene(loginRoot, 800, 500);
         Store store = new Store();
         
         primaryStage.setTitle("Login_Screen");

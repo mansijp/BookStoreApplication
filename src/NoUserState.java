@@ -26,6 +26,7 @@ public class NoUserState extends StoreState {
     
     protected NoUserState(Store store){
         super(store);
+        store.changeScreen(logInScreen());
     }
     
     public void login(Store store, String username, String password, Pane root){
@@ -77,7 +78,7 @@ public class NoUserState extends StoreState {
         welcome.setFont(Font.font("Vardane", 26));
         HBox usernamehbox = new HBox(10);
         welcome.setText("Welcome. Please Login");
-        Label namelabel = new Label ("UserName");
+        Label namelabel = new Label ("Username");
         TextField namefield = new TextField();
         namefield.setPrefColumnCount(20);
         namefield.setPromptText("Enter your User Name");
@@ -85,7 +86,6 @@ public class NoUserState extends StoreState {
         HBox passhbox = new HBox(10);
         Label pwrdlabel = new Label ("Password");
         TextField passwordField = new PasswordField();
-        //passwordField.setHeight(10);
         passwordField.setPrefColumnCount(20);
         passwordField.setPromptText("Enter your Password");
         
@@ -98,6 +98,23 @@ public class NoUserState extends StoreState {
         Button loginButton = new Button();
         loginButton.setText("LogIn");
         loginButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+        
+        String username = namefield.getText();
+        String password = passwordField.getText();
+        
+        loginButton.setOnAction(event -> {
+            if (username.equals("admin")) {
+                store.setState(new OwnerState(store));
+            } else {
+                for (Customer customer : store.customers) {
+                    if (customer.customerName.equals(username)) {
+
+                        store.setState(new CustomerState(store));
+
+                    }
+                }
+            }
+        });
 
         VBox loginstart = new VBox(40);
         loginstart.setAlignment(Pos.CENTER);
