@@ -45,12 +45,13 @@ public class Store extends Application{
 
         scene = new Scene(root, 500, 500);
 
-        primaryStage.setTitle("Hello World!");
+        primaryStage.setTitle("Book Store");
         primaryStage.setScene(scene);
         primaryStage.show();
         
-        Store bookstoreApplication = new Store();
-        setState(new CustomerState(this));
+        //Store bookstoreApplication = new Store();
+        this.setState(new NoUserState(this));
+        changeScreen(state.logInScreen());
     }
     
     public static void main(String[] args){
