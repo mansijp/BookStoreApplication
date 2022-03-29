@@ -33,7 +33,7 @@ public class Main3 extends Application{
         primaryStage.setScene(scene);
         primaryStage.show();
         
-        NoUserState defaultState = new NoUserState();
+        NoUserState defaultState = new NoUserState(store);
         changeScreen(defaultState.loginScreen(store));
         //NoUserState defaultState = new NoUserState(this);
     }
