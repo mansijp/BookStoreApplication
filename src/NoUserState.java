@@ -19,6 +19,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
      
 public class NoUserState extends StoreState {
     
@@ -71,21 +73,35 @@ public class NoUserState extends StoreState {
     @Override
     public Pane logInScreen(){
        
+        Label welcome = new Label ();
+        welcome.setFont(Font.font("Vardane", 26));
+        HBox usernamehbox = new HBox(10);
+        welcome.setText("Welcome. Please Login");
         Label namelabel = new Label ("UserName");
-        TextField namefield = new TextField("username");
+        TextField namefield = new TextField();
+        namefield.setPrefColumnCount(20);
+        namefield.setPromptText("Enter your User Name");
+        usernamehbox.getChildren().addAll(namelabel, namefield);
+        HBox passhbox = new HBox(10);
         Label pwrdlabel = new Label ("Password");
         TextField passwordField = new PasswordField();
-        passwordField.setText("password");
-
-        HBox logindata = new HBox(20);
+        //passwordField.setHeight(10);
+        passwordField.setPrefColumnCount(20);
+        passwordField.setPromptText("Enter your Password");
+        
+        passhbox.getChildren().addAll(pwrdlabel,passwordField);
+        
+        HBox logindata = new HBox(60);
         logindata.setAlignment(Pos.CENTER);
-        logindata.getChildren().addAll(namelabel, namefield,pwrdlabel,passwordField);
+        logindata.getChildren().addAll(usernamehbox,passhbox);
         
         Button loginButton = new Button();
         loginButton.setText("LogIn");
+        loginButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
 
-        VBox loginstart = new VBox(20);
+        VBox loginstart = new VBox(40);
         loginstart.setAlignment(Pos.CENTER);
+        loginstart.getChildren().add(welcome);
         loginstart.getChildren().add(logindata);
         loginstart.getChildren().add(loginButton);
        
