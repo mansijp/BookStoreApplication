@@ -2,9 +2,9 @@
 
 
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -21,15 +21,15 @@ import javafx.beans.property.StringProperty;
 public class BookListing{
     public Book book;
     private StringProperty bookName;
-    private IntegerProperty bookPrice;
+    private DoubleProperty bookPrice;
     private BooleanProperty isSelected;
     
     public BookListing(String name, int price){
         bookName = new SimpleStringProperty(name);
-        bookPrice = new SimpleIntegerProperty(price);
+        bookPrice = new SimpleDoubleProperty(price);
         isSelected = new SimpleBooleanProperty(false);
     }
     public StringProperty bookNameProperty() {return bookName;}
-    public IntegerProperty bookPriceProperty() {return bookPrice;}
+    public DoubleProperty bookPriceProperty() {return bookPrice;}
     public BooleanProperty isSelectedProperty() {return isSelected;}
 }

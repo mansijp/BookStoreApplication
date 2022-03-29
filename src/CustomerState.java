@@ -27,6 +27,7 @@ import javafx.scene.text.Text;
 public class CustomerState extends StoreState{
     private Customer customer;
     private ObservableList<BookListing> books;
+    private double totalCost;
     
     // Also pass in the customer
     public CustomerState(Store store){
@@ -35,7 +36,7 @@ public class CustomerState extends StoreState{
         String name = "name";
         String password = "password";
         customer = new Customer(name, password);
-        
+                
         store.changeScreen(customerStartScreen());
     }
     
@@ -44,7 +45,23 @@ public class CustomerState extends StoreState{
     }
     
     public void buyBooksWithMoney(){
+        totalCost = getTotalCost();
         
+        // $1 = +10 points 
+        customer.customerPoints += totalCost * 10;
+    }
+    
+    public void buyBooksWithPoints(){
+        totalCost = getTotalCost();
+        
+        // -100 points = $1
+        while(customer.customerPoints >= 100 && totalCost > 0){
+            customer.customerPoints -= 100;
+            totalCost -= 1;
+        }
+        
+        // $1 = +10 points 
+        customer.customerPoints += totalCost * 10;
     }
     
     public String getStatus(){
@@ -53,17 +70,22 @@ public class CustomerState extends StoreState{
         return "Gold";
     }
     
-    public void buyBooksWithPoints(){
-        
+    private double getTotalCost(){
+        double cost = 0;
+        for(BookListing book : books){
+            if(book.isSelectedProperty().get())
+                cost += book.bookPriceProperty().get();
+        }
+        return cost;
     }
     
-    public Pane customerCostScreen(){       
+    public Pane customerCostScreen(){
         Text totalCostText = new Text();
-        totalCostText.setText("Total Cost: ");
+        totalCostText.setText("Total Cost: " + totalCost);
         
         Text pointsText = new Text();
         pointsText.setText("Points: " + customer.customerPoints 
-                + ", Status:" + customer.customerStatus);
+                + ", Status: " + getStatus());
         
         Button logoutButton = new Button();
         logoutButton.setText("Logout");
@@ -84,8 +106,13 @@ public class CustomerState extends StoreState{
     private ObservableList<BookListing> getBooks(){
         ObservableList<BookListing> books = FXCollections.observableArrayList();
         
-        for(int i = 0; i < 20; i++)
-            books.add(new BookListing("harry potter " + i, 200));
+        books.add(new BookListing("book1a", 200));
+        books.add(new BookListing("book1b", 500));
+        books.add(new BookListing("book2", 50));
+        books.add(new BookListing("book3", 100));
+        
+        //for(int i = 0; i < 20; i++)
+        //    books.add(new BookListing("harry potter " + i, 200));
         
         return books;
     }
@@ -142,10 +169,12 @@ public class CustomerState extends StoreState{
         root.setAlignment(Pos.TOP_CENTER);
         
         buyButton.setOnAction(event -> {
+            buyBooksWithMoney();
             store.changeScreen(customerCostScreen());
         });
         
         buyWithPointsButton.setOnAction(event -> {
+            buyBooksWithPoints();
             store.changeScreen(customerCostScreen());
         });
         
