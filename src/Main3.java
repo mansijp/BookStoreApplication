@@ -29,7 +29,7 @@ public class Main3 extends Application{
         scene = new Scene(loginRoot, 500, 500);
         Store store = new Store();
         
-        primaryStage.setTitle("Login Screen");
+        primaryStage.setTitle("Login_Screen");
         primaryStage.setScene(scene);
         primaryStage.show();
         
