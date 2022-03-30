@@ -114,7 +114,18 @@ public class OwnerState extends StoreState{
         ownerstart.getChildren().add(booksButton);
         ownerstart.getChildren().add(customersButton);
         ownerstart.getChildren().add(logoutButton);
-       
+        
+        /*booksButton.setOnAction(event -> {
+            store.changeScreen(ownerBooksScreen(store));
+        });*/
+        
+        customersButton.setOnAction(event -> {
+            store.changeScreen(ownerCustomerScreen(store));
+        });
+        
+        logoutButton.setOnAction(event -> {
+            logOut(store);
+        });
         return ownerstart;
     }
     
@@ -158,7 +169,7 @@ public class OwnerState extends StoreState{
         customerTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
         //Add customer part of windows
-        Label namelabel = new Label ("UserName");
+        Label namelabel = new Label ("Username");
         TextField namefield = new TextField("Enter new customer's Username");
         Label pwrdlabel = new Label ("Password");
         TextField passwordfield = new TextField("Enter new customer's Password");
@@ -172,11 +183,26 @@ public class OwnerState extends StoreState{
         
         // Deleted Customer part of the table
         Button deleteCustomerButton = new Button("Delete");
+        Button backButton = new Button("Back");
+        
         VBox ownerCustomer = new VBox(10);
         ownerCustomer.getChildren().add(customerTable);
         ownerCustomer.getChildren().add(addCustomer);
-        ownerCustomer.getChildren().add(deleteCustomerButton);
+        HBox buttons = new HBox(10);
+        buttons.getChildren().addAll(deleteCustomerButton, backButton);
+        buttons.setAlignment(Pos.CENTER);
+        
+        ownerCustomer.getChildren().add(buttons);
         ownerCustomer.setAlignment(Pos.TOP_CENTER);
+        
+        //Button functionality
+        backButton.setOnAction(event -> {
+            store.changeScreen(ownerStartScreen());
+        });
+        
+        /*deleteCustomerButton.setOnAction(event -> {
+            deleteCustomer();
+        });*/
         
         return ownerCustomer;
     }

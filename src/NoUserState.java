@@ -28,48 +28,6 @@ public class NoUserState extends StoreState {
         super(store);
         store.changeScreen(logInScreen());
     }
-    
-    public void login(Store store, String username, String password, Pane root){
-                
-        /*if(username.equals("admin") && password.equals("admin")){
-            store.state = (OwnerState) store.state;
-            //changeScreen(root);
-            store.changeScreen(root);
-            
-        } else {
-            
-            for(Customer customer: store.customers){
-                if(customer.customerName.equals(username) && customer.customerPassword.equals(password)){
-                    store.state = (CustomerState) store.state;
-                    store.changeScreen(root);
-                }
-            }
-            
-        }*/
-    }
-    
-    
-    public Pane loginScreen(Store store) {
-        // Table
-        
-
-        // button
-        Button loginBtn = new Button("Login");
-        /*loginBtn.setDefaultButton(false);
-        loginBtn.setOnAction((ActionEvent e) -> {
-            if(store.state instanceof OwnerState){
-                //main.changeScreen(loginPane); // owner screen
-            } else if(store.state instanceof CustomerState){
-                //main.changeScreen(loginPane); // customer screen
-            }
-        });*/
-        
-        VBox vbox = new VBox(20);
-        vbox.getChildren().add(loginBtn);
-        
-        return vbox;
-    }
-        
 
     @Override
     public Pane logInScreen(){
@@ -98,29 +56,33 @@ public class NoUserState extends StoreState {
         Button loginButton = new Button();
         loginButton.setText("LogIn");
         loginButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
-        
-        String username = namefield.getText();
-        String password = passwordField.getText();
-        
-        loginButton.setOnAction(event -> {
-            if (username.equals("admin")) {
-                store.setState(new OwnerState(store));
-            } else {
-                for (Customer customer : store.customers) {
-                    if (customer.customerName.equals(username)) {
-
-                        store.setState(new CustomerState(store));
-
-                    }
-                }
-            }
-        });
 
         VBox loginstart = new VBox(40);
         loginstart.setAlignment(Pos.CENTER);
         loginstart.getChildren().add(welcome);
         loginstart.getChildren().add(logindata);
         loginstart.getChildren().add(loginButton);
+        
+        loginButton.setOnAction(event -> {
+            String username = namefield.getText();
+            String password = passwordField.getText();
+            
+            if (username.equals("admin") && password.equals("admin")) {
+                store.setState(new OwnerState(store));
+            } else {
+                for (Customer customer : store.customers) {
+                    if (customer.customerName.equals(username)) {
+                        // TESTING FOR LOOP
+                        /*Label test = new Label();
+                        test.setText("customer");
+                        logindata.getChildren().add(test);*/
+                        
+                        store.setState(new CustomerState(store));
+
+                    }
+                }
+            }
+        });
        
         return loginstart;
     }
