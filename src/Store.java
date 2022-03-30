@@ -36,6 +36,7 @@ public class Store extends Application{
         customers.add(new Customer("c", "C"));
     }
     
+    @Override
     public void start(Stage primaryStage) {  
         StackPane root = new StackPane();
 
@@ -48,6 +49,13 @@ public class Store extends Application{
         //Store bookstoreApplication = new Store();
         this.setState(new NoUserState(this));
         changeScreen(state.logInScreen());
+        
+        loadData();
+    }
+    
+    @Override
+    public void stop(){
+        saveData();
     }
     
     public static void main(String[] args){
@@ -67,14 +75,15 @@ public class Store extends Application{
         customers = new ArrayList<>();
 
         try{
-            File file = new File("books.txt");
+            File file = new File("src/books.txt");
             Scanner scanner = new Scanner(file);
             while(scanner.hasNextLine()){
                 String[] bookData = scanner.nextLine().split(" ");
                 books.add(new Book(bookData[0], Double.parseDouble(bookData[1])));
+                System.out.println(bookData[0] + " " + Double.parseDouble(bookData[1]));
             }
             
-            file = new File("customers.txt");
+            file = new File("src/customers.txt");
             scanner = new Scanner(file);
             while(scanner.hasNextLine()){
                 String[] data = scanner.nextLine().split(" ");
@@ -91,16 +100,16 @@ public class Store extends Application{
     
     public void saveData(){
          try{
-            PrintWriter writer = new PrintWriter("books.txt");
+            PrintWriter writer = new PrintWriter("src/books.txt");
             for(Book book : books)
-                writer.println(book.getName() + " " + book.getPrice());
+                writer.println("bookname" + " " + 5.0);
             writer.close();
             
-            writer = new PrintWriter("customers.txt");
+            writer = new PrintWriter("src/customers.txt");
             for(Customer customer : customers)
-                writer.println(customer.getCustomerName() + " " 
-                        + customer.getCustomerPoints() + " "
-                        + customer.getCustomerPassword());
+                writer.println("name" + " " 
+                        + 3 + " "
+                        + "pswd");
             writer.close(); 
         }catch(Exception e){
             e.printStackTrace();
