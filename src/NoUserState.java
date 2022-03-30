@@ -71,14 +71,8 @@ public class NoUserState extends StoreState {
                 store.setState(new OwnerState(store));
             } else {
                 for (Customer customer : store.customers) {
-                    if (customer.customerName.equals(username)) {
-                        // TESTING FOR LOOP
-                        /*Label test = new Label();
-                        test.setText("customer");
-                        logindata.getChildren().add(test);*/
-                        
+                    if (customer.customerName.equals(username) && customer.customerPassword.equals(password)) {                        
                         store.setState(new CustomerState(store));
-
                     }
                 }
             }

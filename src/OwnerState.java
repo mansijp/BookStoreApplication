@@ -21,6 +21,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
@@ -72,13 +73,15 @@ public class OwnerState extends StoreState{
         boolean found = false;
         int size = store.customers.size();
         int i = 0;
-        while ((found == false) && (i < size)) {
+        while (found && (i < size)) {
             Customer cst = store.customers.get(i);
             if ((cst.customerName.equals(name)) && (cst.customerPassword.equals(password))) {
                 found = true;
                 System.out.println("Customer already in Store Customers list");
-                i = size + 1;
+                
             }
+            //i = size + 1;
+            i ++;
 
             /*for(Customer cst:store.customers){
                 if((cst.customerName.equals(name))&&(cst.customerPassword.equals(password))){
@@ -175,9 +178,13 @@ public class OwnerState extends StoreState{
         
         //Add customer part of windows
         Label namelabel = new Label ("Username");
-        TextField namefield = new TextField("Enter new customer's Username");
+        TextField namefield = new TextField();
+        namefield.setPromptText("New Customer's Username");
+        namefield.setMinWidth(170);
         Label pwrdlabel = new Label ("Password");
-        TextField passwordfield = new TextField("Enter new customer's Password");
+        TextField passwordfield = new TextField();
+        passwordfield.setPromptText("New Customer's Password");
+        passwordfield.setMinWidth(170);
         
         Button addcustomerButton = new Button();
         addcustomerButton.setText("Add");
@@ -185,6 +192,10 @@ public class OwnerState extends StoreState{
         HBox addCustomer = new HBox(20);
         addCustomer.setAlignment(Pos.CENTER);
         addCustomer.getChildren().addAll(namelabel, namefield,pwrdlabel,passwordfield,addcustomerButton);
+        
+        addcustomerButton.setOnAction(event -> {
+            registerNewCustomer(store, namefield.getText(), passwordfield.getText());
+        });
         
         // Deleted Customer part of the table
         Button deleteCustomerButton = new Button("Delete");
@@ -200,14 +211,13 @@ public class OwnerState extends StoreState{
         ownerCustomer.getChildren().add(buttons);
         ownerCustomer.setAlignment(Pos.TOP_CENTER);
         
-        //Button functionality
         backButton.setOnAction(event -> {
             store.changeScreen(ownerStartScreen());
         });
         
-        /*deleteCustomerButton.setOnAction(event -> {
-            deleteCustomer(store, );
-        });*/
+        deleteCustomerButton.setOnAction(event -> {
+            deleteCustomer(store, namefield.getText(), passwordfield.getText());
+        });
         
         return ownerCustomer;
     }
