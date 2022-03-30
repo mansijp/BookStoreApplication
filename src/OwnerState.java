@@ -21,6 +21,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
@@ -67,28 +68,29 @@ public class OwnerState extends StoreState{
         Book book = new Book(bookname,bookprice);
         store.books.remove(book);
     }
-    public void registerNewCustomer(Store store,String name, String password){
+    public void registerNewCustomer(Store store, String name, String password) {
         Customer customer = new Customer(name, password);
         boolean found = false;
         int size = store.customers.size();
         int i = 0;
-        while ((found==false) && (i<size)){
-            Customer cst= store.customers.get(i);
-            if((cst.customerName.equals(name))&&(cst.customerPassword.equals(password))){
-                    found = true;
-                    System.out.println("Customer already in Store Customers list");
-                    i = size + 1;
-                }
-            
+        while (found && (i < size)) {
+            Customer cst = store.customers.get(i);
+            if ((cst.customerName.equals(name)) && (cst.customerPassword.equals(password))) {
+                found = true;
+                System.out.println("Customer already in Store Customers list");
+                
+            }
+            //i = size + 1;
+            i ++;
+
             /*for(Customer cst:store.customers){
                 if((cst.customerName.equals(name))&&(cst.customerPassword.equals(password))){
                     found = true;
                     System.out.println("Customer already in Store Customers list");
                 }
             } */
-            
         }
-        if(found==false){
+        if (found == false) {
             store.customers.add(customer);
         }
     }
@@ -114,7 +116,20 @@ public class OwnerState extends StoreState{
         ownerstart.getChildren().add(booksButton);
         ownerstart.getChildren().add(customersButton);
         ownerstart.getChildren().add(logoutButton);
-       
+        
+        //Button functionality
+        customersButton.setOnAction(event -> {
+            store.changeScreen(ownerCustomerScreen(store));
+        });
+        
+        booksButton.setOnAction(event -> {
+            store.changeScreen(ownerBooksScreen(store));
+        });
+        
+        logoutButton.setOnAction(event -> {
+            logOut(store);
+        });
+        
         return ownerstart;
     }
     
@@ -158,10 +173,14 @@ public class OwnerState extends StoreState{
         customerTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
         //Add customer part of windows
-        Label namelabel = new Label ("UserName");
-        TextField namefield = new TextField("Enter new customer's Username");
+        Label namelabel = new Label ("Username");
+        TextField namefield = new TextField();
+        namefield.setPromptText("New Customer's Username");
+        namefield.setMinWidth(170);
         Label pwrdlabel = new Label ("Password");
-        TextField passwordfield = new TextField("Enter new customer's Password");
+        TextField passwordfield = new TextField();
+        passwordfield.setPromptText("New Customer's Password");
+        passwordfield.setMinWidth(170);
         
         Button addcustomerButton = new Button();
         addcustomerButton.setText("Add");
@@ -170,13 +189,101 @@ public class OwnerState extends StoreState{
         addCustomer.setAlignment(Pos.CENTER);
         addCustomer.getChildren().addAll(namelabel, namefield,pwrdlabel,passwordfield,addcustomerButton);
         
+        addcustomerButton.setOnAction(event -> {
+            registerNewCustomer(store, namefield.getText(), passwordfield.getText());
+        });
+        
         // Deleted Customer part of the table
         Button deleteCustomerButton = new Button("Delete");
+        Button backButton = new Button("Back");
+        
         VBox ownerCustomer = new VBox(10);
         ownerCustomer.getChildren().add(customerTable);
         ownerCustomer.getChildren().add(addCustomer);
-        ownerCustomer.getChildren().add(deleteCustomerButton);
+        HBox buttons = new HBox(10);
+        buttons.getChildren().addAll(deleteCustomerButton, backButton);
+        buttons.setAlignment(Pos.CENTER);
+        
+        ownerCustomer.getChildren().add(buttons);
         ownerCustomer.setAlignment(Pos.TOP_CENTER);
+        
+        backButton.setOnAction(event -> {
+            store.changeScreen(ownerStartScreen());
+        });
+        
+        deleteCustomerButton.setOnAction(event -> {
+            deleteCustomer(store, namefield.getText(), passwordfield.getText());
+        });
+        
+        return ownerCustomer;
+    }
+    
+    public Pane ownerBooksScreen(Store store){
+                
+        //table with three columns,
+        // book name, book price, select.
+        // TableView<S>
+        TableView<Book> bookTable = new TableView<>();
+        ObservableList<Book> books = FXCollections.observableArrayList(store.books);
+        bookTable.setItems(books);
+        
+        TableColumn<Book,String> customerNameCol = new TableColumn<>("Book Name");
+        customerNameCol.setCellValueFactory(new Callback<CellDataFeatures<Book, String>, ObservableValue<String>>(){
+            public ObservableValue<String> call(CellDataFeatures<Book, String> str){
+                return new ReadOnlyObjectWrapper(str.getValue().name);
+            }
+        });
+        
+        TableColumn<Book,Integer> customerPointsCol = new TableColumn<>("Book Price");
+        customerPointsCol.setCellValueFactory(new PropertyValueFactory("bookPrice"));
+        customerPointsCol.setCellValueFactory(new Callback<CellDataFeatures<Book, Integer>, ObservableValue<Integer>>(){
+            public ObservableValue<Integer> call(CellDataFeatures<Book, Integer> str){
+                return new ReadOnlyObjectWrapper(str.getValue().price);
+            }
+        });
+
+        bookTable.getColumns().setAll(customerNameCol,customerPointsCol);
+        bookTable.setEditable(true);
+        bookTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+        
+        //Add book part of windows
+        Label namelabel = new Label ("Book Name");
+        TextField namefield = new TextField();
+        namefield.setPromptText("New Book's Name");
+        namefield.setMinWidth(170);
+
+        Button addbookButton = new Button();
+        addbookButton.setText("Add");
+
+        HBox addCustomer = new HBox(20);
+        addCustomer.setAlignment(Pos.CENTER);
+        addCustomer.getChildren().addAll(namelabel, namefield, addbookButton);
+        
+        /*addbookButton.setOnAction(event -> {
+            
+        });*/
+        
+        // Deleted Book part of the table
+        Button deleteBookButton = new Button("Delete");
+        Button backButton = new Button("Back");
+        
+        VBox ownerCustomer = new VBox(10);
+        ownerCustomer.getChildren().add(bookTable);
+        ownerCustomer.getChildren().add(addCustomer);
+        HBox buttons = new HBox(10);
+        buttons.getChildren().addAll(deleteBookButton, backButton);
+        buttons.setAlignment(Pos.CENTER);
+        
+        ownerCustomer.getChildren().add(buttons);
+        ownerCustomer.setAlignment(Pos.TOP_CENTER);
+        
+        backButton.setOnAction(event -> {
+            store.changeScreen(ownerStartScreen());
+        });
+        
+        /*deleteBookButton.setOnAction(event -> {
+           
+        });*/
         
         return ownerCustomer;
     }

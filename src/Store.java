@@ -30,7 +30,11 @@ public class Store extends Application{
     protected StoreState state = null;
     
     // Constructor
-    public Store(){ }
+    public Store(){ 
+        customers.add(new Customer("a", "A"));
+        customers.add(new Customer("b", "B"));
+        customers.add(new Customer("c", "C"));
+    }
     
     public void start(Stage primaryStage) {  
         StackPane root = new StackPane();
@@ -50,7 +54,6 @@ public class Store extends Application{
         launch(args);
     }
 
-    // set states in this class and don't typecast the state variable
     public void setState(StoreState state){
         this.state = state;
     }

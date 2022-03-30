@@ -12,8 +12,8 @@
  */
 public class Book {
     
-    private String name;
-    private double price;
+    String name;
+    double price;
     
     public Book (String bookname, double bookprice){
         name = bookname;
