@@ -1,5 +1,8 @@
 
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.scene.Scene;
@@ -29,17 +32,6 @@ public class Store extends Application{
     // Constructor
     public Store(){ }
     
-    // Methods
-   /* 
-    public void loadData(){
-        
-    }
-    
-    public void saveData(){
-         
-    }
-    */
-    
     public void start(Stage primaryStage) {  
         StackPane root = new StackPane();
 
@@ -65,5 +57,50 @@ public class Store extends Application{
     
     public void changeScreen(Pane root){
         scene.setRoot(root);
+    }
+    
+    public void loadData(){
+        books = new ArrayList<>();
+        customers = new ArrayList<>();
+
+        try{
+            File file = new File("books.txt");
+            Scanner scanner = new Scanner(file);
+            while(scanner.hasNextLine()){
+                String[] bookData = scanner.nextLine().split(" ");
+                books.add(new Book(bookData[0], Double.parseDouble(bookData[1])));
+            }
+            
+            file = new File("customers.txt");
+            scanner = new Scanner(file);
+            while(scanner.hasNextLine()){
+                String[] data = scanner.nextLine().split(" ");
+                //name points password
+                customers.add(new Customer(data[0], data[2]));
+            }
+            
+            scanner.close();
+            
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
+    public void saveData(){
+         try{
+            PrintWriter writer = new PrintWriter("books.txt");
+            for(Book book : books)
+                writer.println(book.getName() + " " + book.getPrice());
+            writer.close();
+            
+            writer = new PrintWriter("customers.txt");
+            for(Customer customer : customers)
+                writer.println(customer.getCustomerName() + " " 
+                        + customer.getCustomerPoints() + " "
+                        + customer.getCustomerPassword());
+            writer.close(); 
+        }catch(Exception e){
+            e.printStackTrace();
+        }
     }
 }
