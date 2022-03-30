@@ -67,28 +67,27 @@ public class OwnerState extends StoreState{
         Book book = new Book(bookname,bookprice);
         store.books.remove(book);
     }
-    public void registerNewCustomer(Store store,String name, String password){
+    public void registerNewCustomer(Store store, String name, String password) {
         Customer customer = new Customer(name, password);
         boolean found = false;
         int size = store.customers.size();
         int i = 0;
-        while ((found==false) && (i<size)){
-            Customer cst= store.customers.get(i);
-            if((cst.customerName.equals(name))&&(cst.customerPassword.equals(password))){
-                    found = true;
-                    System.out.println("Customer already in Store Customers list");
-                    i = size + 1;
-                }
-            
+        while ((found == false) && (i < size)) {
+            Customer cst = store.customers.get(i);
+            if ((cst.customerName.equals(name)) && (cst.customerPassword.equals(password))) {
+                found = true;
+                System.out.println("Customer already in Store Customers list");
+                i = size + 1;
+            }
+
             /*for(Customer cst:store.customers){
                 if((cst.customerName.equals(name))&&(cst.customerPassword.equals(password))){
                     found = true;
                     System.out.println("Customer already in Store Customers list");
                 }
             } */
-            
         }
-        if(found==false){
+        if (found == false) {
             store.customers.add(customer);
         }
     }
@@ -119,13 +118,19 @@ public class OwnerState extends StoreState{
             store.changeScreen(ownerBooksScreen(store));
         });*/
         
+        //Button functionality
         customersButton.setOnAction(event -> {
             store.changeScreen(ownerCustomerScreen(store));
         });
         
+        /*booksButton.setOnAction(event -> {
+            store.changeScreen(ownerBooksScreen(store));
+        });*/
+        
         logoutButton.setOnAction(event -> {
             logOut(store);
         });
+        
         return ownerstart;
     }
     
@@ -201,7 +206,7 @@ public class OwnerState extends StoreState{
         });
         
         /*deleteCustomerButton.setOnAction(event -> {
-            deleteCustomer();
+            deleteCustomer(store, );
         });*/
         
         return ownerCustomer;

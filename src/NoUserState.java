@@ -35,7 +35,7 @@ public class NoUserState extends StoreState {
         Label welcome = new Label ();
         welcome.setFont(Font.font("Vardane", 26));
         HBox usernamehbox = new HBox(10);
-        welcome.setText("Welcome. Please Login");
+        welcome.setText("Welcome to the Bookstore App. Please Login");
         Label namelabel = new Label ("Username");
         TextField namefield = new TextField();
         namefield.setPrefColumnCount(20);
