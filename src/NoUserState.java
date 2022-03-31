@@ -48,7 +48,7 @@ public class NoUserState extends StoreState {
         
         HBox passhbox = new HBox(10);
         passhbox.setAlignment(Pos.CENTER);
-        Label pwrdlabel = new Label ("Password");
+        Label pwrdlabel = new Label ("Password ");
         TextField passwordField = new PasswordField();
         passwordField.setPrefColumnCount(20);
         passwordField.setPromptText("Enter your Password");
