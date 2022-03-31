@@ -250,14 +250,18 @@ public class OwnerState extends StoreState{
         Label namelabel = new Label ("Book Name");
         TextField namefield = new TextField();
         namefield.setPromptText("New Book's Name");
-        namefield.setMinWidth(170);
+        namefield.setMinWidth(270);
+        Label pricelabel = new Label ("Book Price");
+        TextField pricefield = new TextField();
+        pricefield.setPromptText("New Book's Price");
+        pricefield.setMinWidth(100);
 
         Button addbookButton = new Button();
         addbookButton.setText("Add");
 
         HBox addCustomer = new HBox(20);
         addCustomer.setAlignment(Pos.CENTER);
-        addCustomer.getChildren().addAll(namelabel, namefield, addbookButton);
+        addCustomer.getChildren().addAll(namelabel, namefield, pricelabel, pricefield, addbookButton);
         
         /*addbookButton.setOnAction(event -> {
             
