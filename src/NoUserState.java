@@ -33,8 +33,7 @@ public class NoUserState extends StoreState {
         store.changeScreen(logInScreen());
     }
 
-    @Override
-    public Pane logInScreen(){
+    private Pane logInScreen(){
         Label welcome = new Label ();
         welcome.setFont(Font.font("Vardane", 26));
         welcome.setText("Welcome to the Bookstore App. Please Login!");

@@ -10,14 +10,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
-
 /**
  *
  * @author Mansi
@@ -28,11 +20,7 @@ public class Store extends Application{
     protected ArrayList <Book> books =  new ArrayList<>();
     protected ArrayList <Customer> customers =  new ArrayList<>();
     protected StoreState state = null;
-    
-    // Constructor
-    public Store(){ 
-    }
-    
+       
     @Override
     public void start(Stage primaryStage) {  
         StackPane root = new StackPane();
@@ -43,9 +31,7 @@ public class Store extends Application{
         primaryStage.setScene(getScene());
         primaryStage.show();
         
-        //Store bookstoreApplication = new Store();
         this.setState(new NoUserState(this));
-        
         loadData();
     }
     
