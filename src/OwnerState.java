@@ -63,40 +63,42 @@ public class OwnerState extends StoreState{
     }
     public void addBook(Store store, Book book){
         store.books.add(book);
+        store.changeScreen(ownerBooksScreen(store));
     }
     public void removeBook(Store store, String bookname, double bookprice){
-        Book book = new Book(bookname,bookprice);
-        store.books.remove(book);
+        for (Book book:store.books){
+            if ((book.name.equals(bookname)) && (book.price == bookprice)) {
+                store.books.remove(book);
+            }
+        }
+//        Book book = new Book(bookname,bookprice);
+//        store.books.remove(book);
     }
     public void registerNewCustomer(Store store, String name, String password) {
         Customer customer = new Customer(name, password);
         boolean found = false;
         int size = store.customers.size();
         int i = 0;
-        while (found && (i < size)) {
+        while (found==false && (i < size)) {
             Customer cst = store.customers.get(i);
             if ((cst.customerName.equals(name)) && (cst.customerPassword.equals(password))) {
                 found = true;
                 System.out.println("Customer already in Store Customers list");
                 
             }
-            //i = size + 1;
             i ++;
-
-            /*for(Customer cst:store.customers){
-                if((cst.customerName.equals(name))&&(cst.customerPassword.equals(password))){
-                    found = true;
-                    System.out.println("Customer already in Store Customers list");
-                }
-            } */
         }
         if (found == false) {
             store.customers.add(customer);
         }
     }
     public void deleteCustomer(Store store, String name, String password){
-        Customer customer = new Customer(name, password);
-        store.customers.remove(customer);
+        
+        for (Customer customer:store.customers){
+            if ((customer.customerName.equals(name)) && (customer.customerPassword.equals(password))) {
+                store.customers.remove(customer);
+            }
+        }
     }
     
     public Pane ownerStartScreen(){
@@ -189,9 +191,7 @@ public class OwnerState extends StoreState{
         addCustomer.setAlignment(Pos.CENTER);
         addCustomer.getChildren().addAll(namelabel, namefield,pwrdlabel,passwordfield,addcustomerButton);
         
-        addcustomerButton.setOnAction(event -> {
-            registerNewCustomer(store, namefield.getText(), passwordfield.getText());
-        });
+       
         
         // Deleted Customer part of the table
         Button deleteCustomerButton = new Button("Delete");
@@ -211,8 +211,15 @@ public class OwnerState extends StoreState{
             store.changeScreen(ownerStartScreen());
         });
         
+        addcustomerButton.setOnAction(event -> {
+            registerNewCustomer(store, namefield.getText(), passwordfield.getText());
+        });
+        
         deleteCustomerButton.setOnAction(event -> {
-            deleteCustomer(store, namefield.getText(), passwordfield.getText());
+            Customer customer = customerTable.getSelectionModel().getSelectedItem();
+            customers.remove(customer);
+            deleteCustomer(store, customer.customerName, customer.customerPassword);
+            System.out.println("Deleted "+customer.customerName+" "+ customer.customerPassword);
         });
         
         return ownerCustomer;
@@ -263,9 +270,7 @@ public class OwnerState extends StoreState{
         addCustomer.setAlignment(Pos.CENTER);
         addCustomer.getChildren().addAll(namelabel, namefield, pricelabel, pricefield, addbookButton);
         
-        /*addbookButton.setOnAction(event -> {
-            
-        });*/
+        
         
         // Deleted Book part of the table
         Button deleteBookButton = new Button("Delete");
@@ -285,10 +290,18 @@ public class OwnerState extends StoreState{
             store.changeScreen(ownerStartScreen());
         });
         
-        /*deleteBookButton.setOnAction(event -> {
-           
-        });*/
+        addbookButton.setOnAction(event -> {
+            Book book = new Book (namefield.getText(), Double.parseDouble(pricefield.getText()));    
+            addBook(store, book);
+            System.out.println("Book "+namefield.getText()+" Price "+pricefield.getText()+" added");
+        });
         
+        deleteBookButton.setOnAction(event -> {
+            Book book = bookTable.getSelectionModel().getSelectedItem();
+            books.remove(book);
+            removeBook(store, book.name, book.price);
+            System.out.println("Deleted Book: "+book.name+" "+ book.price);
+        });
         return ownerCustomer;
     }
 

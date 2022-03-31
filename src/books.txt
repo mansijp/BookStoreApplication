@@ -1,3 +1,4 @@
 bookname,,5.0
-harrypotter,,10.0
 Conan,,13.4
+Spider Man,,23.0
+Fifty Shades of Grey,,129.0

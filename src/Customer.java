@@ -18,11 +18,14 @@ public class Customer {
     Customer(String name, String password){
         customerName = name;
         customerPassword = password;
+        customerPoints = 0;
+        setStatus();
     }
     Customer(String name, String password, int point){
         customerName = name;
         customerPassword = password;
         customerPoints = point;
+        setStatus();
     }
     
     public String getCustomerName() {
@@ -31,5 +34,10 @@ public class Customer {
     
     public String getCustomerPassword() {
         return customerPassword;
+    }
+    void setStatus(){
+        if(this.customerPoints < 1000){
+            customerStatus = "Silver";
+        }else{customerStatus = "Gold";}
     }
 }
