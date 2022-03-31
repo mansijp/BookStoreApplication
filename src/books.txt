@@ -1,2 +1,0 @@
-Harry Potter;50.0
-Book;234.153

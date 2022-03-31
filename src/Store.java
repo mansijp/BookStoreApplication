@@ -31,9 +31,6 @@ public class Store extends Application{
     
     // Constructor
     public Store(){ 
-        customers.add(new Customer("a", "A"));
-        customers.add(new Customer("b", "B"));
-        customers.add(new Customer("c", "C"));
     }
     
     @Override
@@ -48,7 +45,6 @@ public class Store extends Application{
         
         //Store bookstoreApplication = new Store();
         this.setState(new NoUserState(this));
-        changeScreen(state.logInScreen());
         
         loadData();
     }

@@ -31,24 +31,23 @@ public class NoUserState extends StoreState {
         super(store);
         store.changeScreen(logInScreen());
     }
-    protected NoUserState(int i, Store store){
-        super(store);
-        store.changeScreen(logInScreen2());
-    }
 
     @Override
     public Pane logInScreen(){
-       
         Label welcome = new Label ();
         welcome.setFont(Font.font("Vardane", 26));
-        HBox usernamehbox = new HBox(10);
         welcome.setText("Welcome to the Bookstore App. Please Login!");
+                
+        HBox usernamehbox = new HBox(10);
+        usernamehbox.setAlignment(Pos.CENTER);
         Label namelabel = new Label ("Username");
         TextField namefield = new TextField();
         namefield.setPrefColumnCount(20);
         namefield.setPromptText("Enter your User Name");
         usernamehbox.getChildren().addAll(namelabel, namefield);
+        
         HBox passhbox = new HBox(10);
+        passhbox.setAlignment(Pos.CENTER);
         Label pwrdlabel = new Label ("Password");
         TextField passwordField = new PasswordField();
         passwordField.setPrefColumnCount(20);
@@ -56,12 +55,19 @@ public class NoUserState extends StoreState {
         
         passhbox.getChildren().addAll(pwrdlabel,passwordField);
         
-        HBox logindata = new HBox(60);
+        Label statuslabel = new Label ("Invalid Username or Password!");
+        statuslabel.setVisible(false);
+        statuslabel.setPrefHeight(40);
+        statuslabel.setFont(Font.font("Vardane",FontPosture.ITALIC, 12));
+        statuslabel.setTextFill(Color.web("red"));
+        statuslabel.setTextAlignment(CENTER);
+        
+        VBox logindata = new VBox();
         logindata.setAlignment(Pos.CENTER);
-        logindata.getChildren().addAll(usernamehbox,passhbox);
+        logindata.getChildren().addAll(usernamehbox,passhbox,statuslabel);
         
         Button loginButton = new Button();
-        loginButton.setText("LogIn");
+        loginButton.setText("Log In");
         loginButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
 
         VBox loginstart = new VBox(40);
@@ -85,77 +91,9 @@ public class NoUserState extends StoreState {
                     }
                 }
                 if (found == false){
-                    store.setState(new NoUserState(1, store));
-                }
-            }
-        });
-       
-        return loginstart;
-    }
-    
-    public Pane logInScreen2(){
-       
-        Label welcome = new Label ();
-        welcome.setFont(Font.font("Vardane", 26));
-        welcome.setText("Welcome to the Bookstore App. Please Login!");
-        
-        
-        Label namelabel = new Label ("Username");
-        TextField namefield = new TextField();
-        namefield.setPrefColumnCount(20);
-        namefield.setPromptText("Enter your User Name");
-        
-        HBox usernamehbox = new HBox(10);
-        usernamehbox.getChildren().addAll(namelabel, namefield);
-        
-        Label pwrdlabel = new Label ("Password");
-        TextField passwordField = new PasswordField();
-        passwordField.setPrefColumnCount(20);
-        passwordField.setPromptText("Enter your Password");
-        
-        HBox passhbox = new HBox(10);
-        passhbox.getChildren().addAll(pwrdlabel,passwordField);
-        
-        HBox logindata = new HBox(60);
-        logindata.setAlignment(Pos.CENTER);
-        logindata.getChildren().addAll(usernamehbox,passhbox);
-        
-        Label statuslabel = new Label ("Invalid Username or Password!");
-        statuslabel.setPrefHeight(40);
-        statuslabel.setFont(Font.font("Vardane",FontPosture.ITALIC, 12));
-        statuslabel.setTextFill(Color.web("red"));
-        statuslabel.setTextAlignment(CENTER);
-        
-        VBox middleBox = new VBox(10);
-        middleBox.setAlignment(Pos.CENTER);
-        middleBox.getChildren().addAll(logindata,statuslabel);
-        
-        Button loginButton = new Button();
-        loginButton.setText("LogIn");
-        loginButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
-
-        VBox loginstart = new VBox(40);
-        loginstart.setAlignment(Pos.CENTER);
-        loginstart.getChildren().add(welcome);
-        loginstart.getChildren().add(middleBox);
-        loginstart.getChildren().add(loginButton);
-        
-        loginButton.setOnAction(event -> {
-            String username = namefield.getText();
-            String password = passwordField.getText();
-            
-            if (username.equals("admin") && password.equals("admin")) {
-                store.setState(new OwnerState(store));
-            } else {
-                boolean found = false;
-                for (Customer customer : store.customers) {
-                    if (customer.getName().equals(username) && customer.getPassword().equals(password)) {                        
-                        found = true;
-                        store.setState(new CustomerState(store, customer));
-                    }
-                }
-                if (found == false){
-                    store.setState(new NoUserState(1, store));
+                    statuslabel.setVisible(true);
+                    namefield.setText("");
+                    passwordField.setText("");
                 }
             }
         });
