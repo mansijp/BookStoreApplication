@@ -9,27 +9,23 @@
  * @author Cyrille
  */
 
-
-
-import javafx.scene.input.MouseEvent;
-import javafx.event.EventHandler;
-import java.util.ArrayList;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
-import javafx.event.EventHandler;
 
 public class OwnerState extends StoreState{
     //Overview: OwnerState is immutable singleton class
@@ -55,15 +51,14 @@ public class OwnerState extends StoreState{
     }
     
     private void removeBook(Store store, String bookname, double bookprice){
-        ArrayList<Book> books = new ArrayList<>();
+        Book bookToDelete = null;
         for (Book book:store.books){
-            if ((book.getName().equals(bookname)) && (book.getPrice() == bookprice)) {
-                books.add(book);
-            }
+            if ((book.getName().equals(bookname)) && (book.getPrice() == bookprice))
+                bookToDelete = book;
         }
         
-        for(Book book : books)
-            store.books.remove(book);
+        if(bookToDelete != null)
+            store.books.remove(bookToDelete);
     }
     
     private void registerNewCustomer(Store store, String name, String password) {
@@ -86,14 +81,14 @@ public class OwnerState extends StoreState{
     }
     
     private void deleteCustomer(Store store, String name, String password){
-        ArrayList<Customer> customers = new ArrayList<>();
+        Customer customerToDelete = null;
         for (Customer customer:store.customers){
             if ((customer.getName().equals(name)) && (customer.getPassword().equals(password)))
-                customers.add(customer);
+                customerToDelete = customer;
         }
         
-        for(Customer customer : customers)
-            store.customers.remove(customer);
+        if(customerToDelete != null)
+            store.customers.remove(customerToDelete);
     }
     
     private Pane ownerStartScreen(){
@@ -162,7 +157,7 @@ public class OwnerState extends StoreState{
           public void handle(MouseEvent e) {
             booksButton.setMaxSize(400, 300);
             booksButton.setFont(Font.font("Verdana",FontWeight.BOLD, 25));
-            booksButton.setStyle("-fx-text-fill: #4da8ab; -fx-background-radius: 20px: -fx-font-weight: bold");
+            booksButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold; -fx-font-size: 25px");
           }
         });
         
@@ -183,7 +178,7 @@ public class OwnerState extends StoreState{
           public void handle(MouseEvent e) {
             customersButton.setMaxSize(400, 300);
             customersButton.setFont(Font.font("Verdana",FontWeight.BOLD, 25));
-            customersButton.setStyle("-fx-text-fill: #4da8ab; -fx-background-radius: 20px: -fx-font-weight: bold");
+            customersButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold; -fx-font-size: 25px");
           }
         });
         
@@ -204,7 +199,7 @@ public class OwnerState extends StoreState{
           public void handle(MouseEvent e) {
             logoutButton.setMaxSize(400, 300);
             logoutButton.setFont(Font.font("Verdana",FontWeight.BOLD, 25));
-            logoutButton.setStyle("-fx-text-fill: #4da8ab; -fx-background-radius: 20px: -fx-font-weight: bold");
+            logoutButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold; -fx-font-size: 25px");
           }
         });
         
@@ -270,6 +265,26 @@ public class OwnerState extends StoreState{
         
         Button addcustomerButton = new Button();
         addcustomerButton.setText("Add");
+        
+        // Animations - Back Button
+        addcustomerButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            addcustomerButton.setFont(Font.font("Verdana",FontWeight.BOLD, 15));
+            addcustomerButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold");
+          }
+        });
+        
+        addcustomerButton.addEventHandler(MouseEvent.MOUSE_EXITED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            addcustomerButton.setMaxSize(250, 200);
+            addcustomerButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+            addcustomerButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px");
+          }
+        });
 
         HBox addCustomer = new HBox(20);
         addCustomer.setAlignment(Pos.CENTER);
@@ -277,7 +292,49 @@ public class OwnerState extends StoreState{
         
         // Deleted Customer part of the table
         Button deleteCustomerButton = new Button("Delete");
+        deleteCustomerButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px");
         Button backButton = new Button("Back");
+        backButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px");
+        
+        // Animations - Back Button
+        backButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            backButton.setFont(Font.font("Verdana",FontWeight.BOLD, 15));
+            backButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold");
+          }
+        });
+        
+        backButton.addEventHandler(MouseEvent.MOUSE_EXITED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            backButton.setMaxSize(250, 200);
+            backButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+            backButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px; -fx-");
+          }
+        });
+        
+        // Animations - Delete Button
+        deleteCustomerButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            deleteCustomerButton.setFont(Font.font("Verdana",FontWeight.BOLD, 15));
+            deleteCustomerButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold");
+          }
+        });
+        
+        deleteCustomerButton.addEventHandler(MouseEvent.MOUSE_EXITED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            deleteCustomerButton.setMaxSize(250, 200);
+            deleteCustomerButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+            deleteCustomerButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px");
+          }
+        });
         
         VBox ownerCustomer = new VBox(10);
         ownerCustomer.getChildren().add(customerTable);
@@ -371,6 +428,26 @@ public class OwnerState extends StoreState{
 
         Button addbookButton = new Button();
         addbookButton.setText("Add");
+        
+        // Animations - Add Button
+        addbookButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            addbookButton.setFont(Font.font("Verdana",FontWeight.BOLD, 15));
+            addbookButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold");
+          }
+        });
+        
+        addbookButton.addEventHandler(MouseEvent.MOUSE_EXITED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            addbookButton.setMaxSize(250, 200);
+            addbookButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+            addbookButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px");
+          }
+        });
 
         HBox addCustomer = new HBox(20);
         addCustomer.setAlignment(Pos.CENTER);
@@ -379,6 +456,46 @@ public class OwnerState extends StoreState{
         // Deleted Book part of the table
         Button deleteBookButton = new Button("Delete");
         Button backButton = new Button("Back");
+        
+        // Animations - Back Button
+        backButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            backButton.setFont(Font.font("Verdana",FontWeight.BOLD, 15));
+            backButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold");
+          }
+        });
+        
+        backButton.addEventHandler(MouseEvent.MOUSE_EXITED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            backButton.setMaxSize(250, 200);
+            backButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+            backButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px; -fx-");
+          }
+        });
+        
+        // Animations - Delete Button
+        deleteBookButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            deleteBookButton.setFont(Font.font("Verdana",FontWeight.BOLD, 15));
+            deleteBookButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold");
+          }
+        });
+        
+        deleteBookButton.addEventHandler(MouseEvent.MOUSE_EXITED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            deleteBookButton.setMaxSize(250, 200);
+            deleteBookButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+            deleteBookButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px");
+          }
+        });
         
         VBox ownerCustomer = new VBox(10);
         ownerCustomer.getChildren().add(bookTable);

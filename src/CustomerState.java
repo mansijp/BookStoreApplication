@@ -3,6 +3,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
@@ -11,10 +12,12 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import static javafx.scene.text.TextAlignment.CENTER;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -166,17 +169,32 @@ public class CustomerState extends StoreState{
         buttons.getChildren().add(buyWithPointsButton);
         buttons.getChildren().add(logoutButton);
         
+        Label statuslabel = new Label ("Please select a book.");
+        statuslabel.setVisible(false);
+        statuslabel.setFont(Font.font("Vardane",FontPosture.ITALIC, 12));
+        statuslabel.setTextFill(Color.web("red"));
+        statuslabel.setTextAlignment(CENTER);
+        
         VBox root = new VBox(10);
         root.getChildren().add(welcomeText);
         root.getChildren().add(bookTable);
         root.getChildren().add(buttons);
+        root.getChildren().add(statuslabel);
         root.setAlignment(Pos.TOP_CENTER);
         
         buyButton.setOnAction(event -> {
+            if(!booksSelected()){
+                statuslabel.setVisible(true);
+                return;
+            }
             buyBooksWithMoney();
             store.changeScreen(customerCostScreen());
         });
         buyButton.setOnKeyPressed(event -> {
+            if(!booksSelected()){
+                statuslabel.setVisible(true);
+                return;
+            }
             KeyCode key = event.getCode();
                 if(key.equals(KeyCode.ENTER)){
                    buyBooksWithMoney();
@@ -185,11 +203,19 @@ public class CustomerState extends StoreState{
         });
         
         buyWithPointsButton.setOnAction(event -> {
+            if(!booksSelected()){
+                statuslabel.setVisible(true);
+                return;
+            }
             buyBooksWithPoints();
             store.changeScreen(customerCostScreen());
         });
         
         buyWithPointsButton.setOnKeyPressed(event -> {
+            if(!booksSelected()){
+                statuslabel.setVisible(true);
+                return;
+            }
             KeyCode key = event.getCode();
                 if(key.equals(KeyCode.ENTER)){
                    buyBooksWithPoints();
@@ -209,5 +235,13 @@ public class CustomerState extends StoreState{
         });
        
         return root;
+    }
+    
+    private boolean booksSelected(){
+        for(BookListing book : books){
+            if(book.isSelectedProperty().get())
+                return true;
+        }
+        return false;
     }
 }
