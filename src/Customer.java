@@ -31,7 +31,9 @@ public class Customer {
     public String getCustomerName() {
         return customerName;
     }
-    
+    public int getCustomerPoints() {
+        return customerPoints;
+    }
     public String getCustomerPassword() {
         return customerPassword;
     }

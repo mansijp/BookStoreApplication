@@ -90,6 +90,7 @@ public class OwnerState extends StoreState{
         }
         if (found == false) {
             store.customers.add(customer);
+            store.changeScreen(ownerCustomerScreen(store));
         }
     }
     public void deleteCustomer(Store store, String name, String password){

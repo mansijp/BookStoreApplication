@@ -12,6 +12,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 /*
@@ -30,8 +33,9 @@ public class CustomerState extends StoreState{
     private double totalCost;
     
     // Also pass in the customer
-    public CustomerState(Store store){
+    public CustomerState(Store store, Customer customer){
         super(store);
+        this.customer = customer;
         
         String name = "name";
         String password = "password";
@@ -119,6 +123,7 @@ public class CustomerState extends StoreState{
     
     public Pane customerStartScreen(){
         Text welcomeText = new Text();
+        welcomeText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 18));
         welcomeText.setText("Welcome " + customer.customerName 
                 + ". You have " + customer.customerPoints + " points. "
                 + "Your status is " + customer.customerStatus

@@ -8,7 +8,7 @@
 
 /**
  *
- * @author mansi
+ * @author Mansi
  */
 
 import javafx.geometry.Pos;
@@ -81,7 +81,7 @@ public class NoUserState extends StoreState {
                 for (Customer customer : store.customers) {
                     if (customer.customerName.equals(username) && customer.customerPassword.equals(password)) {                        
                         found = true;
-                        store.setState(new CustomerState(store));
+                        store.setState(new CustomerState(store, customer));
                     }
                 }
                 if (found == false){
@@ -138,8 +138,6 @@ public class NoUserState extends StoreState {
         loginstart.setAlignment(Pos.CENTER);
         loginstart.getChildren().add(welcome);
         loginstart.getChildren().add(middleBox);
-      //  loginstart.getChildren().add(logindata);
-      //  loginstart.getChildren().add(statuslabel);
         loginstart.getChildren().add(loginButton);
         
         loginButton.setOnAction(event -> {
@@ -149,10 +147,15 @@ public class NoUserState extends StoreState {
             if (username.equals("admin") && password.equals("admin")) {
                 store.setState(new OwnerState(store));
             } else {
+                boolean found = false;
                 for (Customer customer : store.customers) {
                     if (customer.customerName.equals(username) && customer.customerPassword.equals(password)) {                        
-                        store.setState(new CustomerState(store));
+                        found = true;
+                        store.setState(new CustomerState(store, customer));
                     }
+                }
+                if (found == false){
+                    store.setState(new NoUserState(1, store));
                 }
             }
         });
