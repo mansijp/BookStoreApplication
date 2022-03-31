@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -103,7 +104,14 @@ public class CustomerState extends StoreState{
         logoutButton.setOnAction(event -> {
             logout();
         });
-        
+         
+        logoutButton.setOnKeyPressed(event -> {
+            KeyCode key = event.getCode();
+                if(key.equals(KeyCode.ENTER)){
+                   logout();
+                }
+        });
+       
         return root;
     }
     
@@ -171,14 +179,36 @@ public class CustomerState extends StoreState{
             buyBooksWithMoney();
             store.changeScreen(customerCostScreen());
         });
+        buyButton.setOnKeyPressed(event -> {
+            KeyCode key = event.getCode();
+                if(key.equals(KeyCode.ENTER)){
+                   buyBooksWithMoney();
+                   store.changeScreen(customerCostScreen()); 
+                }
+        });
         
         buyWithPointsButton.setOnAction(event -> {
             buyBooksWithPoints();
             store.changeScreen(customerCostScreen());
         });
         
+        buyWithPointsButton.setOnKeyPressed(event -> {
+            KeyCode key = event.getCode();
+                if(key.equals(KeyCode.ENTER)){
+                   buyBooksWithPoints();
+                   store.changeScreen(customerCostScreen());
+                }
+        });
+        
         logoutButton.setOnAction(event -> {
             logout();
+        });
+        
+       logoutButton.setOnKeyPressed(event -> {
+            KeyCode key = event.getCode();
+                if(key.equals(KeyCode.ENTER)){
+                   logout();
+                }
         });
        
         return root;

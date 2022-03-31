@@ -19,6 +19,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -124,12 +125,33 @@ public class OwnerState extends StoreState{
             store.changeScreen(ownerCustomerScreen(store));
         });
         
+        customersButton.setOnKeyPressed(event -> {
+            KeyCode key = event.getCode();
+                if(key.equals(KeyCode.ENTER)){
+                    store.changeScreen(ownerCustomerScreen(store));
+                }
+        });
+        
         booksButton.setOnAction(event -> {
             store.changeScreen(ownerBooksScreen(store));
         });
         
+        booksButton.setOnKeyPressed(event -> {
+            KeyCode key = event.getCode();
+                if(key.equals(KeyCode.ENTER)){
+                    store.changeScreen(ownerBooksScreen(store));
+                }
+        });
+                
         logoutButton.setOnAction(event -> {
             logOut(store);
+        });
+        
+        logoutButton.setOnKeyPressed(event -> {
+            KeyCode key = event.getCode();
+                if(key.equals(KeyCode.ENTER)){
+                    logOut(store);
+                }
         });
         
         return ownerstart;
@@ -211,8 +233,22 @@ public class OwnerState extends StoreState{
             store.changeScreen(ownerStartScreen());
         });
         
+        backButton.setOnKeyPressed(event -> {
+            KeyCode key = event.getCode();
+                if(key.equals(KeyCode.ENTER)){
+                   store.changeScreen(ownerStartScreen()); 
+                }
+        });
+        
         addcustomerButton.setOnAction(event -> {
             registerNewCustomer(store, namefield.getText(), passwordfield.getText());
+        });
+        
+        addcustomerButton.setOnKeyPressed(event -> {
+            KeyCode key = event.getCode();
+                if(key.equals(KeyCode.ENTER)){
+                   registerNewCustomer(store, namefield.getText(), passwordfield.getText()); 
+                }
         });
         
         deleteCustomerButton.setOnAction(event -> {
@@ -221,6 +257,16 @@ public class OwnerState extends StoreState{
             deleteCustomer(store, customer.getName(), customer.getPassword());
             System.out.println("Deleted "+customer.getName() + " " + customer.getPassword());
         });
+        
+//        deleteCustomerButton.setOnKeyPressed(event -> {
+//            KeyCode key = event.getCode();
+//                if(key.equals(KeyCode.ENTER)){
+//                   Customer customer = customerTable.getSelectionModel().getSelectedItem();
+//                    customers.remove(customer);
+//                    deleteCustomer(store, customer.getName(), customer.getPassword());
+//                    System.out.println("Deleted "+customer.getName() + " " + customer.getPassword());
+//                }
+//        });
         
         return ownerCustomer;
     }
@@ -290,10 +336,26 @@ public class OwnerState extends StoreState{
             store.changeScreen(ownerStartScreen());
         });
         
+        backButton.setOnKeyPressed(event -> {
+            KeyCode key = event.getCode();
+                if(key.equals(KeyCode.ENTER)){
+                   store.changeScreen(ownerStartScreen()); 
+                }
+        });
+        
         addbookButton.setOnAction(event -> {
             Book book = new Book (namefield.getText(), Double.parseDouble(pricefield.getText()));    
             addBook(store, book);
             System.out.println("Book "+namefield.getText()+" Price "+pricefield.getText()+" added");
+        });
+        
+        addbookButton.setOnKeyPressed(event -> {
+            KeyCode key = event.getCode();
+                if(key.equals(KeyCode.ENTER)){
+                   Book book = new Book (namefield.getText(), Double.parseDouble(pricefield.getText()));    
+                   addBook(store, book);
+                   System.out.println("Book "+namefield.getText()+" Price "+pricefield.getText()+" added");
+                }
         });
         
         deleteBookButton.setOnAction(event -> {

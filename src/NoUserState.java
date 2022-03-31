@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -94,6 +95,30 @@ public class NoUserState extends StoreState {
                     statuslabel.setVisible(true);
                     namefield.setText("");
                     passwordField.setText("");
+                }
+            }
+        });
+        loginButton.setOnKeyPressed(event -> {
+            KeyCode key = event.getCode();
+                if(key.equals(KeyCode.ENTER)){
+                String username = namefield.getText();
+                String password = passwordField.getText();
+
+                if (username.equals("admin") && password.equals("admin")) {
+                    store.setState(new OwnerState(store));
+                } else {
+                    boolean found = false;
+                    for (Customer customer : store.customers) {
+                        if (customer.getName().equals(username) && customer.getPassword().equals(password)) {                        
+                            found = true;
+                            store.setState(new CustomerState(store, customer));
+                        }
+                    }
+                    if (found == false){
+                        statuslabel.setVisible(true);
+                        namefield.setText("");
+                        passwordField.setText("");
+                    }
                 }
             }
         });
