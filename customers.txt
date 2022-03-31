@@ -1,6 +1,0 @@
-name1 pswd1 12
-name2 pswd2 14
-name3 pswd3 25
-name4 pswd4 65
-name5 pswd5 53
-name6 pswd6 4

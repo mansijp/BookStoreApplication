@@ -1,7 +1,5 @@
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -53,7 +51,6 @@ public class Store extends Application{
         changeScreen(state.logInScreen());
         
         loadData();
-        primaryStage.setOnCloseRequest(event -> {saveData();});
     }
     
     @Override
@@ -81,7 +78,7 @@ public class Store extends Application{
             File file = new File("src/books.txt");
             Scanner scanner = new Scanner(file);
             while(scanner.hasNextLine()){
-                String[] bookData = scanner.nextLine().split(",,");//because a book title can have space
+                String[] bookData = scanner.nextLine().split(" ");
                 books.add(new Book(bookData[0], Double.parseDouble(bookData[1])));
                 System.out.println(bookData[0] + " " + Double.parseDouble(bookData[1]));
             }
@@ -91,7 +88,7 @@ public class Store extends Application{
             while(scanner.hasNextLine()){
                 String[] data = scanner.nextLine().split(" ");
                 //name points password
-                customers.add(new Customer(data[0], data[1], Integer.parseInt(data[2])));
+                customers.add(new Customer(data[0], data[2]));
             }
             
             scanner.close();
@@ -103,18 +100,17 @@ public class Store extends Application{
     
     public void saveData(){
          try{
-             BufferedWriter writer = new BufferedWriter(new FileWriter("src/books.txt",false));
-             for(Book book : books){
-                 writer.write(book.name + ",," + book.price);
-                 writer.newLine();;
-             }
-             writer.flush();
-             BufferedWriter writer2 = new BufferedWriter(new FileWriter("src/customers.txt",false));
-             for(Customer customer : customers){
-                 writer2.write(customer.customerName + " " + customer.customerPassword + " " + customer.customerPoints);
-                 writer2.newLine();;
-             }
-             writer2.flush();
+            PrintWriter writer = new PrintWriter("src/books.txt");
+            for(Book book : books)
+                writer.println(book.getName() + " " + book.getPrice());
+            writer.close();
+            
+            writer = new PrintWriter("src/customers.txt");
+            for(Customer customer : customers)
+                writer.println(customer.getCustomerName() + " " 
+                        + customer.getCustomerPoints() + " "
+                        + customer.getCustomerPassword());
+            writer.close(); 
         }catch(Exception e){
             e.printStackTrace();
         }
