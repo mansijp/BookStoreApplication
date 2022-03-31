@@ -38,11 +38,12 @@ public class NoUserState extends StoreState {
         Label welcome = new Label ();
         welcome.setFont(Font.font("Vardane", 26));
         welcome.setText("Welcome to the Bookstore App. Please Login!");
+        welcome.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold");
                 
         HBox usernamehbox = new HBox(10);
         usernamehbox.setAlignment(Pos.CENTER);
         Label namelabel = new Label ("Username");
-        namelabel.setStyle("-fx-font-size: 14pt;");
+        namelabel.setStyle("-fx-font-size: 14pt");
         TextField namefield = new TextField();
         namefield.setPrefColumnCount(20);
         namefield.setPromptText("Enter your User Name");
@@ -53,7 +54,7 @@ public class NoUserState extends StoreState {
         HBox passhbox = new HBox(10);
         passhbox.setAlignment(Pos.CENTER);
         Label pwrdlabel = new Label ("Password ");
-        pwrdlabel.setStyle("-fx-font-size: 14pt;");
+        pwrdlabel.setStyle("-fx-font-size: 14pt");
         TextField passwordField = new PasswordField();
         passwordField.setPrefColumnCount(20);
         passwordField.setPromptText("Enter your Password");
@@ -76,14 +77,15 @@ public class NoUserState extends StoreState {
         
         Button loginButton = new Button();
         loginButton.setText("Log In");
-        loginButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+        loginButton.setStyle("-fx-text-fill: #4da8ab; -fx-background-radius: 20px");
+        loginButton.setFont(Font.font("Verdana",FontWeight.BOLD, 22));
 
         VBox loginstart = new VBox();
         loginstart.setAlignment(Pos.CENTER);
         loginstart.getChildren().add(welcome);
         loginstart.getChildren().add(logindata);
         loginstart.getChildren().add(loginButton);
-        loginstart.setSpacing(40);
+        loginstart.setSpacing(30);
         
         loginButton.setOnAction(event -> {
             String username = namefield.getText();

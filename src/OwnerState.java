@@ -11,6 +11,7 @@
 
 
 
+import java.awt.event.MouseEvent;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -26,6 +27,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
+import javafx.event.EventHandler;
 
 
 
@@ -163,6 +165,22 @@ public class OwnerState extends StoreState{
                     logOut(store);
                 }
         });
+        
+       /* booksButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+            new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent e) {
+                booksButton.setMaxSize(100, 200);;
+            }
+        });
+
+    button1.addEventHandler(MouseEvent.MOUSE_EXITED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            button1.setEffect(null);
+          }
+        });*/
         
         return ownerstart;
     }
