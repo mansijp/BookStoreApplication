@@ -11,7 +11,9 @@
 
 
 
-import java.awt.event.MouseEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.event.EventHandler;
+import java.util.ArrayList;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -53,11 +55,15 @@ public class OwnerState extends StoreState{
     }
     
     private void removeBook(Store store, String bookname, double bookprice){
+        ArrayList<Book> books = new ArrayList<>();
         for (Book book:store.books){
             if ((book.getName().equals(bookname)) && (book.getPrice() == bookprice)) {
-                store.books.remove(book);
+                books.add(book);
             }
         }
+        
+        for(Book book : books)
+            store.books.remove(book);
     }
     
     private void registerNewCustomer(Store store, String name, String password) {
@@ -80,11 +86,14 @@ public class OwnerState extends StoreState{
     }
     
     private void deleteCustomer(Store store, String name, String password){
+        ArrayList<Customer> customers = new ArrayList<>();
         for (Customer customer:store.customers){
-            if ((customer.getName().equals(name)) && (customer.getPassword().equals(password))) {
-                store.customers.remove(customer);
-            }
+            if ((customer.getName().equals(name)) && (customer.getPassword().equals(password)))
+                customers.add(customer);
         }
+        
+        for(Customer customer : customers)
+            store.customers.remove(customer);
     }
     
     private Pane ownerStartScreen(){
@@ -146,21 +155,68 @@ public class OwnerState extends StoreState{
                 }
         });
         
-       /* booksButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
-            new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent e) {
-                booksButton.setMaxSize(100, 200);;
-            }
-        });
-
-    button1.addEventHandler(MouseEvent.MOUSE_EXITED,
+        // Animations - Books Button
+        booksButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent e) {
-            button1.setEffect(null);
+            booksButton.setMaxSize(400, 300);
+            booksButton.setFont(Font.font("Verdana",FontWeight.BOLD, 25));
+            booksButton.setStyle("-fx-text-fill: #4da8ab; -fx-background-radius: 20px: -fx-font-weight: bold");
           }
-        });*/
+        });
+        
+        booksButton.addEventHandler(MouseEvent.MOUSE_EXITED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            booksButton.setMaxSize(250, 200);
+            booksButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+            booksButton.setStyle("-fx-text-fill: #000000");
+          }
+        });
+        
+        // Animations - Customers Button
+        customersButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            customersButton.setMaxSize(400, 300);
+            customersButton.setFont(Font.font("Verdana",FontWeight.BOLD, 25));
+            customersButton.setStyle("-fx-text-fill: #4da8ab; -fx-background-radius: 20px: -fx-font-weight: bold");
+          }
+        });
+        
+        customersButton.addEventHandler(MouseEvent.MOUSE_EXITED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            customersButton.setMaxSize(250, 200);
+            customersButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+            customersButton.setStyle("-fx-text-fill: #000000");
+          }
+        });
+        
+        // Animations - Logout Button
+        logoutButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            logoutButton.setMaxSize(400, 300);
+            logoutButton.setFont(Font.font("Verdana",FontWeight.BOLD, 25));
+            logoutButton.setStyle("-fx-text-fill: #4da8ab; -fx-background-radius: 20px: -fx-font-weight: bold");
+          }
+        });
+        
+        logoutButton.addEventHandler(MouseEvent.MOUSE_EXITED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            logoutButton.setMaxSize(250, 200);
+            logoutButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+            logoutButton.setStyle("-fx-text-fill: #000000");
+          }
+        });
         
         return ownerstart;
     }
@@ -346,9 +402,14 @@ public class OwnerState extends StoreState{
         });
         
         addbookButton.setOnAction(event -> {
-            Book book = new Book (namefield.getText(), Double.parseDouble(pricefield.getText()));    
-            addBook(store, book);
-            System.out.println("Book "+namefield.getText()+" Price "+pricefield.getText()+" added");
+            try{
+                Book book = new Book (namefield.getText(), Double.parseDouble(pricefield.getText()));    
+                addBook(store, book);
+                System.out.println("Book "+namefield.getText()+" Price "+pricefield.getText()+" added");
+            }catch(NumberFormatException e){
+                namefield.setText("");
+                pricefield.setText("");
+            }
         });
         
         addbookButton.setOnKeyPressed(event -> {
