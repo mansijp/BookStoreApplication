@@ -20,7 +20,11 @@ public class Customer {
         customerPassword = password;
     }
     
+    public String getCustomerName() {
+        return customerName;
+    }
     
-    
-    
+    public String getCustomerPassword() {
+        return customerPassword;
+    }
 }
