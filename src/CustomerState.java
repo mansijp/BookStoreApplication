@@ -1,6 +1,3 @@
-
-
-
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -42,18 +39,18 @@ public class CustomerState extends StoreState{
         store.changeScreen(customerStartScreen());
     }
     
-    public void logout(){
+    private void logout(){
         store.setState(new NoUserState(store));
     }
     
-    public void buyBooksWithMoney(){
+    private void buyBooksWithMoney(){
         totalCost = getTotalCost();
         
         // $1 = +10 points 
         customer.setPoints(customer.getPoints() + (int)totalCost * 10);
     }
     
-    public void buyBooksWithPoints(){
+    private void buyBooksWithPoints(){
         totalCost = getTotalCost();
         
         // -100 points = $1
@@ -84,7 +81,7 @@ public class CustomerState extends StoreState{
         return cost;
     }
     
-    public Pane customerCostScreen(){
+    private Pane customerCostScreen(){
         Text totalCostText = new Text();
         totalCostText.setText("Total Cost: " + totalCost);
         
@@ -124,7 +121,7 @@ public class CustomerState extends StoreState{
         return books;
     }
     
-    public Pane customerStartScreen(){
+    private Pane customerStartScreen(){
         Text welcomeText = new Text();
         welcomeText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 18));
         welcomeText.setText("Welcome " + customer.getName() 

@@ -29,8 +29,6 @@ import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
 import javafx.event.EventHandler;
 
-
-
 public class OwnerState extends StoreState{
     //Overview: OwnerState is immutable singleton class
     //
@@ -38,47 +36,31 @@ public class OwnerState extends StoreState{
     //
     // The rep invarian is: 
     // The rep
-    private static OwnerState s = null;
-    private String username = "admin";
-    private String password = "admin";
     
     public OwnerState(Store store){
         super(store);
         store.changeScreen(ownerStartScreen());
     }
-    
-    //private OwnerState(){
-        
-    //}
-    public static OwnerState getInstance(){
-        if (s == null){
-            s = new OwnerState(new Store());
-        }
-        return s;
-    }
-    
-    public void logIn(){
-        System.out.println("Already logged In");
-    }
 
-    public void logOut(Store store){
+    private void logOut(Store store){
         StoreState st = new NoUserState(store);
         store.setState(st);
     }
-    public void addBook(Store store, Book book){
+    
+    private void addBook(Store store, Book book){
         store.books.add(book);
         store.changeScreen(ownerBooksScreen(store));
     }
-    public void removeBook(Store store, String bookname, double bookprice){
+    
+    private void removeBook(Store store, String bookname, double bookprice){
         for (Book book:store.books){
             if ((book.getName().equals(bookname)) && (book.getPrice() == bookprice)) {
                 store.books.remove(book);
             }
         }
-//        Book book = new Book(bookname,bookprice);
-//        store.books.remove(book);
     }
-    public void registerNewCustomer(Store store, String name, String password) {
+    
+    private void registerNewCustomer(Store store, String name, String password) {
         Customer customer = new Customer(name, password);
         boolean found = false;
         int size = store.customers.size();
@@ -88,7 +70,6 @@ public class OwnerState extends StoreState{
             if ((cst.getName().equals(name)) && (cst.getPassword().equals(password))) {
                 found = true;
                 System.out.println("Customer already in Store Customers list");
-                
             }
             i ++;
         }
@@ -97,8 +78,8 @@ public class OwnerState extends StoreState{
             store.changeScreen(ownerCustomerScreen(store));
         }
     }
-    public void deleteCustomer(Store store, String name, String password){
-        
+    
+    private void deleteCustomer(Store store, String name, String password){
         for (Customer customer:store.customers){
             if ((customer.getName().equals(name)) && (customer.getPassword().equals(password))) {
                 store.customers.remove(customer);
@@ -106,8 +87,7 @@ public class OwnerState extends StoreState{
         }
     }
     
-    public Pane ownerStartScreen(){
-       
+    private Pane ownerStartScreen(){
         // three buttons: Books, Customers, and Logout
         Button booksButton = new Button();
         booksButton.setText("Books");
@@ -186,9 +166,7 @@ public class OwnerState extends StoreState{
     }
     
     //Owner start screen events
-    
-    
-    public Pane ownerCustomerScreen(Store store){
+    private Pane ownerCustomerScreen(Store store){
                 
         //table with three columns,
         // book name, book price, select.
@@ -240,8 +218,6 @@ public class OwnerState extends StoreState{
         HBox addCustomer = new HBox(20);
         addCustomer.setAlignment(Pos.CENTER);
         addCustomer.getChildren().addAll(namelabel, namefield,pwrdlabel,passwordfield,addcustomerButton);
-        
-       
         
         // Deleted Customer part of the table
         Button deleteCustomerButton = new Button("Delete");
@@ -299,7 +275,7 @@ public class OwnerState extends StoreState{
         return ownerCustomer;
     }
     
-    public Pane ownerBooksScreen(Store store){
+    private Pane ownerBooksScreen(Store store){
                 
         //table with three columns,
         // book name, book price, select.
@@ -343,8 +319,6 @@ public class OwnerState extends StoreState{
         HBox addCustomer = new HBox(20);
         addCustomer.setAlignment(Pos.CENTER);
         addCustomer.getChildren().addAll(namelabel, namefield, pricelabel, pricefield, addbookButton);
-        
-        
         
         // Deleted Book part of the table
         Button deleteBookButton = new Button("Delete");
@@ -392,9 +366,7 @@ public class OwnerState extends StoreState{
             removeBook(store, book.getName(), book.getPrice());
             System.out.println("Deleted Book: " + book.getName() + " " + book.getPrice());
         });
+        
         return ownerCustomer;
     }
-
-    
-    
 }
