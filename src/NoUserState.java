@@ -25,7 +25,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
 import static javafx.scene.text.TextAlignment.CENTER;
-import javafx.scene.control.CheckBox;
      
 public class NoUserState extends StoreState {
     
@@ -84,8 +83,6 @@ public class NoUserState extends StoreState {
         loginstart.setAlignment(Pos.CENTER);
         loginstart.getChildren().add(welcome);
         loginstart.getChildren().add(logindata);
-        CheckBox checkBox = new CheckBox("Hide Password");
-        loginstart.getChildren().add(checkBox);
         loginstart.getChildren().add(loginButton);
         loginstart.setSpacing(30);
         
