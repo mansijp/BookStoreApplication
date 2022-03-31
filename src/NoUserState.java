@@ -34,8 +34,7 @@ public class NoUserState extends StoreState {
         store.changeScreen(logInScreen());
     }
 
-    @Override
-    public Pane logInScreen(){
+    private Pane logInScreen(){
         Label welcome = new Label ();
         welcome.setFont(Font.font("Vardane", 26));
         welcome.setText("Welcome to the Bookstore App. Please Login!");
@@ -43,17 +42,23 @@ public class NoUserState extends StoreState {
         HBox usernamehbox = new HBox(10);
         usernamehbox.setAlignment(Pos.CENTER);
         Label namelabel = new Label ("Username");
+        namelabel.setStyle("-fx-font-size: 14pt;");
         TextField namefield = new TextField();
         namefield.setPrefColumnCount(20);
         namefield.setPromptText("Enter your User Name");
+        namefield.setStyle("-fx-font-size: 12pt;");
         usernamehbox.getChildren().addAll(namelabel, namefield);
+        usernamehbox.setSpacing(20);
         
         HBox passhbox = new HBox(10);
         passhbox.setAlignment(Pos.CENTER);
         Label pwrdlabel = new Label ("Password ");
+        pwrdlabel.setStyle("-fx-font-size: 14pt;");
         TextField passwordField = new PasswordField();
         passwordField.setPrefColumnCount(20);
         passwordField.setPromptText("Enter your Password");
+        passwordField.setStyle("-fx-font-size: 12pt;");
+        passhbox.setSpacing(20);
         
         passhbox.getChildren().addAll(pwrdlabel,passwordField);
         
@@ -66,6 +71,7 @@ public class NoUserState extends StoreState {
         
         VBox logindata = new VBox();
         logindata.setAlignment(Pos.CENTER);
+        logindata.setSpacing(20);
         logindata.getChildren().addAll(usernamehbox,passhbox,statuslabel);
         
         Button loginButton = new Button();
