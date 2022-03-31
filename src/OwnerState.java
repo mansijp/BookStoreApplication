@@ -13,7 +13,6 @@
 
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
