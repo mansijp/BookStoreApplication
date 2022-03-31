@@ -223,7 +223,6 @@ public class OwnerState extends StoreState{
         // book name, book price, select.
         // TableView<S>
         TableView<Customer> customerTable = new TableView<>();
-        customerTable.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold");
         ObservableList<Customer> customers = FXCollections.observableArrayList(store.customers);
         customerTable.setItems(customers);
         
