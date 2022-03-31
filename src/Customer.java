@@ -19,4 +19,8 @@ public class Customer {
         customerName = name;
         customerPassword = password;
     }
+    
+    
+    
+    
 }
