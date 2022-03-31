@@ -25,6 +25,7 @@ public class BookListing{
     private final BooleanProperty isSelected;
     
     public BookListing(Book book){
+        this.book = book;
         bookName = new SimpleStringProperty(book.getName());
         bookPrice = new SimpleDoubleProperty(book.getPrice());
         isSelected = new SimpleBooleanProperty(false);

@@ -1,6 +1,7 @@
 
 
 
+import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
@@ -65,11 +66,20 @@ public class CustomerState extends StoreState{
     }
     
     private double getTotalCost(){
+        ArrayList<BookListing> booksToBuy = new ArrayList<>();
         double cost = 0;
         for(BookListing book : books){
-            if(book.isSelectedProperty().get())
+            if(book.isSelectedProperty().get()){
+                booksToBuy.add(book);
                 cost += book.bookPriceProperty().get();
+            }
         }
+        
+        for(BookListing book : booksToBuy){
+            store.books.remove(book.book);
+            books.remove(book);
+        }
+        
         return cost;
     }
     
@@ -134,7 +144,6 @@ public class CustomerState extends StoreState{
         bookTable.getColumns().setAll(bookNameCol, bookPriceCol, isSelectedCol);
         bookTable.setEditable(true);
         bookTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-        
         
         // three buttons: buy, reedem points and buy, and logout
         Button buyButton = new Button();

@@ -14,20 +14,17 @@ public class Customer {
     private int points;
     private String name = "";
     private String password = "";
-    private String status = "";
     
     Customer(String name, String password){
         this.name = name;
         this.password = password;
         points = 0;
-        setStatus();
     }
     
     Customer(String name, int point, String password){
         this.name = name;
         this.password = password;
         points = point;
-        setStatus();
     }
     
     public String getName() {
@@ -47,12 +44,9 @@ public class Customer {
     }
     
     public String getStatus(){
-        return status;
-    }
-    
-    void setStatus(){
-        if(this.points < 1000){
-            status = "Silver";
-        }else{status = "Gold";}
+        if(this.points < 1000)
+            return "Silver";
+        else
+            return "Gold";
     }
 }
