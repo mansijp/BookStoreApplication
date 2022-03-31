@@ -102,14 +102,14 @@ public class Store extends Application{
          try{
             PrintWriter writer = new PrintWriter("src/books.txt");
             for(Book book : books)
-                writer.println("bookname" + " " + 5.0);
+                writer.println(book.getName() + " " + book.getPrice());
             writer.close();
             
             writer = new PrintWriter("src/customers.txt");
             for(Customer customer : customers)
-                writer.println("name" + " " 
-                        + 3 + " "
-                        + "pswd");
+                writer.println(customer.getCustomerName() + " " 
+                        + customer.getCustomerPoints() + " "
+                        + customer.getCustomerPassword());
             writer.close(); 
         }catch(Exception e){
             e.printStackTrace();
