@@ -40,7 +40,7 @@ public class Store extends Application{
         scene = new Scene(root, 800, 500);
 
         primaryStage.setTitle("Book Store");
-        primaryStage.setScene(scene);
+        primaryStage.setScene(getScene());
         primaryStage.show();
         
         //Store bookstoreApplication = new Store();
@@ -63,7 +63,7 @@ public class Store extends Application{
     }
     
     public void changeScreen(Pane root){
-        scene.setRoot(root);
+        getScene().setRoot(root);
     }
     
     public void loadData(){
@@ -110,5 +110,12 @@ public class Store extends Application{
         }catch(Exception e){
             e.printStackTrace();
         }
+    }
+
+    /**
+     * @return the scene
+     */
+    public Scene getScene() {
+        return scene;
     }
 }

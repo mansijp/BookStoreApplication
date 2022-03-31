@@ -98,9 +98,34 @@ public class NoUserState extends StoreState {
                 }
             }
         });
-        loginButton.setOnKeyPressed(event -> {
+//        loginButton.setOnKeyPressed(event -> {
+//            KeyCode key = event.getCode();
+//                if(key.equals(KeyCode.ENTER)){
+//                String username = namefield.getText();
+//                String password = passwordField.getText();
+//
+//                if (username.equals("admin") && password.equals("admin")) {
+//                    store.setState(new OwnerState(store));
+//                } else {
+//                    boolean found = false;
+//                    for (Customer customer : store.customers) {
+//                        if (customer.getName().equals(username) && customer.getPassword().equals(password)) {                        
+//                            found = true;
+//                            store.setState(new CustomerState(store, customer));
+//                        }
+//                    }
+//                    if (found == false){
+//                        statuslabel.setVisible(true);
+//                        namefield.setText("");
+//                        passwordField.setText("");
+//                    }
+//                }
+//            }
+//        });
+        
+        store.getScene().setOnKeyPressed(event -> {
             KeyCode key = event.getCode();
-                if(key.equals(KeyCode.ENTER)){
+            if(key.equals(KeyCode.ENTER)&&!namefield.getText().equals(null)&&!passwordField.getText().equals(null)){
                 String username = namefield.getText();
                 String password = passwordField.getText();
 

@@ -150,6 +150,7 @@ public class OwnerState extends StoreState{
         logoutButton.setOnKeyPressed(event -> {
             KeyCode key = event.getCode();
                 if(key.equals(KeyCode.ENTER)){
+                    event.consume();
                     logOut(store);
                 }
         });
