@@ -23,6 +23,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
 
 
@@ -107,15 +109,22 @@ public class OwnerState extends StoreState{
         // three buttons: Books, Customers, and Logout
         Button booksButton = new Button();
         booksButton.setText("Books");
+        booksButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+        booksButton.setMaxWidth(250);
         
         Button customersButton = new Button();
         customersButton.setText("Customers");
+        customersButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+        customersButton.setMaxWidth(250);
         
         Button logoutButton = new Button();
         logoutButton.setText("Logout");
+        logoutButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+        logoutButton.setMaxWidth(250);
 
         VBox ownerstart = new VBox(20);
         ownerstart.setAlignment(Pos.CENTER);
+        ownerstart.setSpacing(35);
         ownerstart.getChildren().add(booksButton);
         ownerstart.getChildren().add(customersButton);
         ownerstart.getChildren().add(logoutButton);
