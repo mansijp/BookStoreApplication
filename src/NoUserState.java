@@ -84,12 +84,11 @@ public class NoUserState extends StoreState {
         loginstart.setAlignment(Pos.CENTER);
         loginstart.getChildren().add(welcome);
         loginstart.getChildren().add(logindata);
-        CheckBox checkBox = new CheckBox("Hide Password");
-        loginstart.getChildren().add(checkBox);
         loginstart.getChildren().add(loginButton);
         loginstart.setSpacing(30);
         
         
+                
         loginButton.setOnAction(event -> {
             String username = namefield.getText();
             String password = passwordField.getText();

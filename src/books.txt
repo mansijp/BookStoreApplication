@@ -1,2 +1,3 @@
-Second Book;15.0
-Book3;189.0
+test;100.0
+w4jioejfoi;1.0
+%;1.0
