@@ -13,6 +13,8 @@
 
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -54,11 +56,15 @@ public class OwnerState extends StoreState{
     }
     
     private void removeBook(Store store, String bookname, double bookprice){
+        ArrayList<Book> books = new ArrayList<>();
         for (Book book:store.books){
             if ((book.getName().equals(bookname)) && (book.getPrice() == bookprice)) {
-                store.books.remove(book);
+                books.add(book);
             }
         }
+        
+        for(Book book : books)
+            store.books.remove(book);
     }
     
     private void registerNewCustomer(Store store, String name, String password) {
@@ -81,11 +87,14 @@ public class OwnerState extends StoreState{
     }
     
     private void deleteCustomer(Store store, String name, String password){
+        ArrayList<Customer> customers = new ArrayList<>();
         for (Customer customer:store.customers){
-            if ((customer.getName().equals(name)) && (customer.getPassword().equals(password))) {
-                store.customers.remove(customer);
-            }
+            if ((customer.getName().equals(name)) && (customer.getPassword().equals(password)))
+                customers.add(customer);
         }
+        
+        for(Customer customer : customers)
+            store.customers.remove(customer);
     }
     
     private Pane ownerStartScreen(){
@@ -394,9 +403,14 @@ public class OwnerState extends StoreState{
         });
         
         addbookButton.setOnAction(event -> {
-            Book book = new Book (namefield.getText(), Double.parseDouble(pricefield.getText()));    
-            addBook(store, book);
-            System.out.println("Book "+namefield.getText()+" Price "+pricefield.getText()+" added");
+            try{
+                Book book = new Book (namefield.getText(), Double.parseDouble(pricefield.getText()));    
+                addBook(store, book);
+                System.out.println("Book "+namefield.getText()+" Price "+pricefield.getText()+" added");
+            }catch(NumberFormatException e){
+                namefield.setText("");
+                pricefield.setText("");
+            }
         });
         
         addbookButton.setOnKeyPressed(event -> {
