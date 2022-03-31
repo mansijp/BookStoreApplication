@@ -9,27 +9,23 @@
  * @author Cyrille
  */
 
-
-
-import javafx.scene.input.MouseEvent;
-import javafx.event.EventHandler;
-import java.util.ArrayList;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
-import javafx.event.EventHandler;
 
 public class OwnerState extends StoreState{
     //Overview: OwnerState is immutable singleton class
@@ -55,15 +51,14 @@ public class OwnerState extends StoreState{
     }
     
     private void removeBook(Store store, String bookname, double bookprice){
-        ArrayList<Book> books = new ArrayList<>();
+        Book bookToDelete = null;
         for (Book book:store.books){
-            if ((book.getName().equals(bookname)) && (book.getPrice() == bookprice)) {
-                books.add(book);
-            }
+            if ((book.getName().equals(bookname)) && (book.getPrice() == bookprice))
+                bookToDelete = book;
         }
         
-        for(Book book : books)
-            store.books.remove(book);
+        if(bookToDelete != null)
+            store.books.remove(bookToDelete);
     }
     
     private void registerNewCustomer(Store store, String name, String password) {
@@ -86,14 +81,14 @@ public class OwnerState extends StoreState{
     }
     
     private void deleteCustomer(Store store, String name, String password){
-        ArrayList<Customer> customers = new ArrayList<>();
+        Customer customerToDelete = null;
         for (Customer customer:store.customers){
             if ((customer.getName().equals(name)) && (customer.getPassword().equals(password)))
-                customers.add(customer);
+                customerToDelete = customer;
         }
         
-        for(Customer customer : customers)
-            store.customers.remove(customer);
+        if(customerToDelete != null)
+            store.customers.remove(customerToDelete);
     }
     
     private Pane ownerStartScreen(){

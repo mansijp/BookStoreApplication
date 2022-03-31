@@ -173,10 +173,14 @@ public class CustomerState extends StoreState{
         root.setAlignment(Pos.TOP_CENTER);
         
         buyButton.setOnAction(event -> {
+            if(!booksSelected())
+                return;
             buyBooksWithMoney();
             store.changeScreen(customerCostScreen());
         });
         buyButton.setOnKeyPressed(event -> {
+            if(!booksSelected())
+                return;
             KeyCode key = event.getCode();
                 if(key.equals(KeyCode.ENTER)){
                    buyBooksWithMoney();
@@ -185,11 +189,15 @@ public class CustomerState extends StoreState{
         });
         
         buyWithPointsButton.setOnAction(event -> {
+            if(!booksSelected())
+                return;
             buyBooksWithPoints();
             store.changeScreen(customerCostScreen());
         });
         
         buyWithPointsButton.setOnKeyPressed(event -> {
+            if(!booksSelected())
+                return;
             KeyCode key = event.getCode();
                 if(key.equals(KeyCode.ENTER)){
                    buyBooksWithPoints();
@@ -209,5 +217,13 @@ public class CustomerState extends StoreState{
         });
        
         return root;
+    }
+    
+    private boolean booksSelected(){
+        for(BookListing book : books){
+            if(book.isSelectedProperty().get())
+                return true;
+        }
+        return false;
     }
 }
