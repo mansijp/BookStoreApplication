@@ -78,11 +78,12 @@ public class NoUserState extends StoreState {
         loginButton.setText("Log In");
         loginButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
 
-        VBox loginstart = new VBox(40);
+        VBox loginstart = new VBox();
         loginstart.setAlignment(Pos.CENTER);
         loginstart.getChildren().add(welcome);
         loginstart.getChildren().add(logindata);
         loginstart.getChildren().add(loginButton);
+        loginstart.setSpacing(40);
         
         loginButton.setOnAction(event -> {
             String username = namefield.getText();
