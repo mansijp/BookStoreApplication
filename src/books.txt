@@ -1,1 +1,3 @@
-bookname 5.0
+bookname,,5.0
+harrypotter,,10.0
+Conan,,13.4

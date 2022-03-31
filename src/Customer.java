@@ -19,6 +19,11 @@ public class Customer {
         customerName = name;
         customerPassword = password;
     }
+    Customer(String name, String password, int point){
+        customerName = name;
+        customerPassword = password;
+        customerPoints = point;
+    }
     
     public String getCustomerName() {
         return customerName;
