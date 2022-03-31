@@ -11,7 +11,8 @@
 
 
 
-import java.awt.event.MouseEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.event.EventHandler;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -146,21 +147,68 @@ public class OwnerState extends StoreState{
                 }
         });
         
-       /* booksButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
-            new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent e) {
-                booksButton.setMaxSize(100, 200);;
-            }
-        });
-
-    button1.addEventHandler(MouseEvent.MOUSE_EXITED,
+        // Animations - Books Button
+        booksButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent e) {
-            button1.setEffect(null);
+            booksButton.setMaxSize(400, 300);
+            booksButton.setFont(Font.font("Verdana",FontWeight.BOLD, 25));
+            booksButton.setStyle("-fx-text-fill: #4da8ab; -fx-background-radius: 20px: -fx-font-weight: bold");
           }
-        });*/
+        });
+        
+        booksButton.addEventHandler(MouseEvent.MOUSE_EXITED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            booksButton.setMaxSize(250, 200);
+            booksButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+            booksButton.setStyle("-fx-text-fill: #000000");
+          }
+        });
+        
+        // Animations - Customers Button
+        customersButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            customersButton.setMaxSize(400, 300);
+            customersButton.setFont(Font.font("Verdana",FontWeight.BOLD, 25));
+            customersButton.setStyle("-fx-text-fill: #4da8ab; -fx-background-radius: 20px: -fx-font-weight: bold");
+          }
+        });
+        
+        customersButton.addEventHandler(MouseEvent.MOUSE_EXITED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            customersButton.setMaxSize(250, 200);
+            customersButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+            customersButton.setStyle("-fx-text-fill: #000000");
+          }
+        });
+        
+        // Animations - Logout Button
+        logoutButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            logoutButton.setMaxSize(400, 300);
+            logoutButton.setFont(Font.font("Verdana",FontWeight.BOLD, 25));
+            logoutButton.setStyle("-fx-text-fill: #4da8ab; -fx-background-radius: 20px: -fx-font-weight: bold");
+          }
+        });
+        
+        logoutButton.addEventHandler(MouseEvent.MOUSE_EXITED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            logoutButton.setMaxSize(250, 200);
+            logoutButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+            logoutButton.setStyle("-fx-text-fill: #000000");
+          }
+        });
         
         return ownerstart;
     }
