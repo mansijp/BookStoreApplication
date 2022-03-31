@@ -13,10 +13,20 @@
 public class Book {
     
     String name;
+
+    
     double price;
     
     public Book (String bookname, double bookprice){
         name = bookname;
         price = bookprice;
+    }
+    
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
     }
 }

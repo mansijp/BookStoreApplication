@@ -27,4 +27,8 @@ public class Customer {
     public String getCustomerPassword() {
         return customerPassword;
     }
+    
+    public double getCustomerPoints(){
+        return customerPoints;
+    }
 }
