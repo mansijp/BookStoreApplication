@@ -11,11 +11,8 @@
  * @author Mansi
  */
 public class Book {
-    
-    String name;
-
-    
-    double price;
+    private String name;
+    private double price;
     
     public Book (String bookname, double bookprice){
         name = bookname;

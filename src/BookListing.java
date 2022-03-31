@@ -20,13 +20,13 @@ import javafx.beans.property.StringProperty;
  */
 public class BookListing{
     public Book book;
-    private StringProperty bookName;
-    private DoubleProperty bookPrice;
-    private BooleanProperty isSelected;
+    private final StringProperty bookName;
+    private final DoubleProperty bookPrice;
+    private final BooleanProperty isSelected;
     
-    public BookListing(String name, int price){
-        bookName = new SimpleStringProperty(name);
-        bookPrice = new SimpleDoubleProperty(price);
+    public BookListing(Book book){
+        bookName = new SimpleStringProperty(book.getName());
+        bookPrice = new SimpleDoubleProperty(book.getPrice());
         isSelected = new SimpleBooleanProperty(false);
     }
     public StringProperty bookNameProperty() {return bookName;}

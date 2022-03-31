@@ -21,7 +21,6 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.util.Callback;
 
@@ -67,7 +66,7 @@ public class OwnerState extends StoreState{
     }
     public void removeBook(Store store, String bookname, double bookprice){
         for (Book book:store.books){
-            if ((book.name.equals(bookname)) && (book.price == bookprice)) {
+            if ((book.getName().equals(bookname)) && (book.getPrice() == bookprice)) {
                 store.books.remove(book);
             }
         }
@@ -238,7 +237,7 @@ public class OwnerState extends StoreState{
         TableColumn<Book,String> customerNameCol = new TableColumn<>("Book Name");
         customerNameCol.setCellValueFactory(new Callback<CellDataFeatures<Book, String>, ObservableValue<String>>(){
             public ObservableValue<String> call(CellDataFeatures<Book, String> str){
-                return new ReadOnlyObjectWrapper(str.getValue().name);
+                return new ReadOnlyObjectWrapper(str.getValue().getName());
             }
         });
         
@@ -246,7 +245,7 @@ public class OwnerState extends StoreState{
         customerPointsCol.setCellValueFactory(new PropertyValueFactory("bookPrice"));
         customerPointsCol.setCellValueFactory(new Callback<CellDataFeatures<Book, Integer>, ObservableValue<Integer>>(){
             public ObservableValue<Integer> call(CellDataFeatures<Book, Integer> str){
-                return new ReadOnlyObjectWrapper(str.getValue().price);
+                return new ReadOnlyObjectWrapper(str.getValue().getPrice());
             }
         });
 
@@ -300,8 +299,8 @@ public class OwnerState extends StoreState{
         deleteBookButton.setOnAction(event -> {
             Book book = bookTable.getSelectionModel().getSelectedItem();
             books.remove(book);
-            removeBook(store, book.name, book.price);
-            System.out.println("Deleted Book: "+book.name+" "+ book.price);
+            removeBook(store, book.getName(), book.getPrice());
+            System.out.println("Deleted Book: " + book.getName() + " " + book.getPrice());
         });
         return ownerCustomer;
     }

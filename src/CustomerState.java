@@ -110,13 +110,8 @@ public class CustomerState extends StoreState{
     private ObservableList<BookListing> getBooks(){
         ObservableList<BookListing> books = FXCollections.observableArrayList();
         
-        books.add(new BookListing("book1a", 200));
-        books.add(new BookListing("book1b", 500));
-        books.add(new BookListing("book2", 50));
-        books.add(new BookListing("book3", 100));
-        
-        //for(int i = 0; i < 20; i++)
-        //    books.add(new BookListing("harry potter " + i, 200));
+        for(Book book : store.books)
+            books.add(new BookListing(book));
         
         return books;
     }
