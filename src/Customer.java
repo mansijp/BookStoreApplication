@@ -11,35 +11,48 @@
  * @author husam
  */
 public class Customer {
-    int customerPoints;
-    String customerName = "";
-    String customerPassword = "";
-    String customerStatus = "";
+    private int points;
+    private String name = "";
+    private String password = "";
+    private String status = "";
+    
     Customer(String name, String password){
-        customerName = name;
-        customerPassword = password;
-        customerPoints = 0;
-        setStatus();
-    }
-    Customer(String name, String password, int point){
-        customerName = name;
-        customerPassword = password;
-        customerPoints = point;
+        this.name = name;
+        this.password = password;
+        points = 0;
         setStatus();
     }
     
-    public String getCustomerName() {
-        return customerName;
+    Customer(String name, int point, String password){
+        this.name = name;
+        this.password = password;
+        points = point;
+        setStatus();
     }
-    public int getCustomerPoints() {
-        return customerPoints;
+    
+    public String getName() {
+        return name;
     }
-    public String getCustomerPassword() {
-        return customerPassword;
+    
+    public int getPoints() {
+        return points;
     }
+    
+    public void setPoints(int points){
+        this.points = points;
+    }
+    
+    public String getPassword() {
+        return password;
+    }
+    
+    public String getStatus(){
+        return status;
+    }
+    
     void setStatus(){
-        if(this.customerPoints < 1000){
-            customerStatus = "Silver";
-        }else{customerStatus = "Gold";}
+        if(this.points < 1000){
+            status = "Silver";
+        }else{status = "Gold";}
     }
 }

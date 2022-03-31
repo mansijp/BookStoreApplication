@@ -80,7 +80,7 @@ public class OwnerState extends StoreState{
         int i = 0;
         while (found==false && (i < size)) {
             Customer cst = store.customers.get(i);
-            if ((cst.customerName.equals(name)) && (cst.customerPassword.equals(password))) {
+            if ((cst.getName().equals(name)) && (cst.getPassword().equals(password))) {
                 found = true;
                 System.out.println("Customer already in Store Customers list");
                 
@@ -95,7 +95,7 @@ public class OwnerState extends StoreState{
     public void deleteCustomer(Store store, String name, String password){
         
         for (Customer customer:store.customers){
-            if ((customer.customerName.equals(name)) && (customer.customerPassword.equals(password))) {
+            if ((customer.getName().equals(name)) && (customer.getPassword().equals(password))) {
                 store.customers.remove(customer);
             }
         }
@@ -150,7 +150,7 @@ public class OwnerState extends StoreState{
         TableColumn<Customer,String> customerNameCol = new TableColumn<>("Username");
         customerNameCol.setCellValueFactory(new Callback<CellDataFeatures<Customer, String>, ObservableValue<String>>(){
             public ObservableValue<String> call(CellDataFeatures<Customer, String> str){
-                return new ReadOnlyObjectWrapper(str.getValue().customerName);
+                return new ReadOnlyObjectWrapper(str.getValue().getName());
             }
         });
         
@@ -158,7 +158,7 @@ public class OwnerState extends StoreState{
         //customerPassCol.setCellValueFactory(new PropertyValueFactory("customerPassword"));
         customerPassCol.setCellValueFactory(new Callback<CellDataFeatures<Customer, String>, ObservableValue<String>>(){
             public ObservableValue<String> call(CellDataFeatures<Customer, String> str){
-                return new ReadOnlyObjectWrapper(str.getValue().customerPassword);
+                return new ReadOnlyObjectWrapper(str.getValue().getPassword());
             }
         });
         
@@ -166,7 +166,7 @@ public class OwnerState extends StoreState{
         customerPointsCol.setCellValueFactory(new PropertyValueFactory("customerPoints"));
         customerPointsCol.setCellValueFactory(new Callback<CellDataFeatures<Customer, Integer>, ObservableValue<Integer>>(){
             public ObservableValue<Integer> call(CellDataFeatures<Customer, Integer> str){
-                return new ReadOnlyObjectWrapper(str.getValue().customerPoints);
+                return new ReadOnlyObjectWrapper(str.getValue().getPoints());
             }
         });
 
@@ -218,8 +218,8 @@ public class OwnerState extends StoreState{
         deleteCustomerButton.setOnAction(event -> {
             Customer customer = customerTable.getSelectionModel().getSelectedItem();
             customers.remove(customer);
-            deleteCustomer(store, customer.customerName, customer.customerPassword);
-            System.out.println("Deleted "+customer.customerName+" "+ customer.customerPassword);
+            deleteCustomer(store, customer.getName(), customer.getPassword());
+            System.out.println("Deleted "+customer.getName() + " " + customer.getPassword());
         });
         
         return ownerCustomer;

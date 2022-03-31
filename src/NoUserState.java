@@ -79,7 +79,7 @@ public class NoUserState extends StoreState {
             } else {
                 boolean found = false;
                 for (Customer customer : store.customers) {
-                    if (customer.customerName.equals(username) && customer.customerPassword.equals(password)) {                        
+                    if (customer.getName().equals(username) && customer.getPassword().equals(password)) {                        
                         found = true;
                         store.setState(new CustomerState(store, customer));
                     }
@@ -149,7 +149,7 @@ public class NoUserState extends StoreState {
             } else {
                 boolean found = false;
                 for (Customer customer : store.customers) {
-                    if (customer.customerName.equals(username) && customer.customerPassword.equals(password)) {                        
+                    if (customer.getName().equals(username) && customer.getPassword().equals(password)) {                        
                         found = true;
                         store.setState(new CustomerState(store, customer));
                     }

@@ -78,7 +78,7 @@ public class Store extends Application{
             File file = new File("src/books.txt");
             Scanner scanner = new Scanner(file);
             while(scanner.hasNextLine()){
-                String[] bookData = scanner.nextLine().split(" ");
+                String[] bookData = scanner.nextLine().split(";");
                 books.add(new Book(bookData[0], Double.parseDouble(bookData[1])));
                 System.out.println(bookData[0] + " " + Double.parseDouble(bookData[1]));
             }
@@ -86,9 +86,9 @@ public class Store extends Application{
             file = new File("src/customers.txt");
             scanner = new Scanner(file);
             while(scanner.hasNextLine()){
-                String[] data = scanner.nextLine().split(" ");
+                String[] data = scanner.nextLine().split(";");
                 //name points password
-                customers.add(new Customer(data[0], data[2]));
+                customers.add(new Customer(data[0], Integer.parseInt(data[1]), data[2]));
             }
             
             scanner.close();
@@ -102,14 +102,14 @@ public class Store extends Application{
          try{
             PrintWriter writer = new PrintWriter("src/books.txt");
             for(Book book : books)
-                writer.println(book.getName() + " " + book.getPrice());
+                writer.println(book.getName() + ";" + book.getPrice());
             writer.close();
             
             writer = new PrintWriter("src/customers.txt");
             for(Customer customer : customers)
-                writer.println(customer.getCustomerName() + " " 
-                        + customer.getCustomerPoints() + " "
-                        + customer.getCustomerPassword());
+                writer.println(customer.getName() + ";" 
+                        + customer.getPoints() + ";"
+                        + customer.getPassword());
             writer.close(); 
         }catch(Exception e){
             e.printStackTrace();

@@ -36,10 +36,6 @@ public class CustomerState extends StoreState{
     public CustomerState(Store store, Customer customer){
         super(store);
         this.customer = customer;
-        
-        String name = "name";
-        String password = "password";
-        customer = new Customer(name, password);
                 
         store.changeScreen(customerStartScreen());
     }
@@ -52,26 +48,20 @@ public class CustomerState extends StoreState{
         totalCost = getTotalCost();
         
         // $1 = +10 points 
-        customer.customerPoints += totalCost * 10;
+        customer.setPoints(customer.getPoints() + (int)totalCost * 10);
     }
     
     public void buyBooksWithPoints(){
         totalCost = getTotalCost();
         
         // -100 points = $1
-        while(customer.customerPoints >= 100 && totalCost > 0){
-            customer.customerPoints -= 100;
+        while(customer.getPoints() >= 100 && totalCost > 0){
+            customer.setPoints(customer.getPoints() - 100);
             totalCost -= 1;
         }
         
         // $1 = +10 points 
-        customer.customerPoints += totalCost * 10;
-    }
-    
-    public String getStatus(){
-        if(customer.customerPoints < 1000)
-            return "Silver";
-        return "Gold";
+        customer.setPoints(customer.getPoints() + (int)totalCost * 10);
     }
     
     private double getTotalCost(){
@@ -88,8 +78,8 @@ public class CustomerState extends StoreState{
         totalCostText.setText("Total Cost: " + totalCost);
         
         Text pointsText = new Text();
-        pointsText.setText("Points: " + customer.customerPoints 
-                + ", Status: " + getStatus());
+        pointsText.setText("Points: " + customer.getPoints() 
+                + ", Status: " + customer.getStatus());
         
         Button logoutButton = new Button();
         logoutButton.setText("Logout");
@@ -119,9 +109,9 @@ public class CustomerState extends StoreState{
     public Pane customerStartScreen(){
         Text welcomeText = new Text();
         welcomeText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 18));
-        welcomeText.setText("Welcome " + customer.customerName 
-                + ". You have " + customer.customerPoints + " points. "
-                + "Your status is " + customer.customerStatus
+        welcomeText.setText("Welcome " + customer.getName() 
+                + ". You have " + customer.getPoints() + " points. "
+                + "Your status is " + customer.getStatus()
         );
         
         //table with three columns,

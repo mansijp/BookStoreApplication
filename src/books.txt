@@ -1,3 +1,2 @@
-Firstbook 12.0
-fly 12.0
-testbook 20.0
+Harry Potter;50.0
+Book;234.153
