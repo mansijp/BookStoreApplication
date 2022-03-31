@@ -1,3 +1,2 @@
 aaron;800;12345
 mansi;110;mansi
-cyrille;120;cyrille
