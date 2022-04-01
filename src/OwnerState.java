@@ -96,17 +96,18 @@ public class OwnerState extends StoreState{
         Button booksButton = new Button();
         booksButton.setText("Books");
         booksButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
-        booksButton.setMaxWidth(250);
+        booksButton.setMinSize(250, 30);
         
         Button customersButton = new Button();
         customersButton.setText("Customers");
         customersButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
-        customersButton.setMaxWidth(250);
+        customersButton.setMinSize(250, 30);
         
         Button logoutButton = new Button();
         logoutButton.setText("Logout");
         logoutButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
-        logoutButton.setMaxWidth(250);
+        logoutButton.setMinSize(250, 30);
+        logoutButton.setFocusTraversable(false);
 
         VBox ownerstart = new VBox(20);
         ownerstart.setAlignment(Pos.CENTER);
@@ -155,9 +156,10 @@ public class OwnerState extends StoreState{
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent e) {
-            booksButton.setMaxSize(400, 300);
+            booksButton.setMinSize(300, 50);
             booksButton.setFont(Font.font("Verdana",FontWeight.BOLD, 25));
-            booksButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold; -fx-font-size: 25px");
+            booksButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold; -fx-font-size: 25px;"
+            + "-fx-border-width: 3px; -fx-border-color: #4da8ab; -fx-border-radius: 15px; -fx-background-radius: 15px");
           }
         });
         
@@ -165,7 +167,7 @@ public class OwnerState extends StoreState{
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent e) {
-            booksButton.setMaxSize(250, 200);
+            booksButton.setMinSize(250, 30);
             booksButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
             booksButton.setStyle("-fx-text-fill: #000000");
           }
@@ -176,9 +178,10 @@ public class OwnerState extends StoreState{
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent e) {
-            customersButton.setMaxSize(400, 300);
+            customersButton.setMinSize(300, 50);
             customersButton.setFont(Font.font("Verdana",FontWeight.BOLD, 25));
-            customersButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold; -fx-font-size: 25px");
+            customersButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold; -fx-font-size: 25px;"+
+            "-fx-border-width: 3px; -fx-border-color: #4da8ab; -fx-border-radius: 15px; -fx-background-radius: 15px");
           }
         });
         
@@ -186,7 +189,7 @@ public class OwnerState extends StoreState{
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent e) {
-            customersButton.setMaxSize(250, 200);
+            customersButton.setMinSize(250, 30);
             customersButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
             customersButton.setStyle("-fx-text-fill: #000000");
           }
@@ -197,9 +200,10 @@ public class OwnerState extends StoreState{
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent e) {
-            logoutButton.setMaxSize(400, 300);
+            logoutButton.setMinSize(300, 50);
             logoutButton.setFont(Font.font("Verdana",FontWeight.BOLD, 25));
-            logoutButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold; -fx-font-size: 25px");
+            logoutButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold; -fx-font-size: 25px;" +
+                    "-fx-border-width: 3px; -fx-border-color: #4da8ab; -fx-border-radius: 15px; -fx-background-radius: 15px");
           }
         });
         
@@ -207,7 +211,7 @@ public class OwnerState extends StoreState{
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent e) {
-            logoutButton.setMaxSize(250, 200);
+            logoutButton.setMinSize(250, 30);
             logoutButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
             logoutButton.setStyle("-fx-text-fill: #000000");
           }
@@ -312,7 +316,7 @@ public class OwnerState extends StoreState{
           public void handle(MouseEvent e) {
             backButton.setMaxSize(250, 200);
             backButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
-            backButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px; -fx-");
+            backButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px");
           }
         });
         
@@ -473,7 +477,7 @@ public class OwnerState extends StoreState{
           public void handle(MouseEvent e) {
             backButton.setMaxSize(250, 200);
             backButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
-            backButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px; -fx-");
+            backButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px");
           }
         });
         
