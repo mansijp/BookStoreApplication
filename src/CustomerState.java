@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,6 +10,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.CheckBoxTableCell;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -87,13 +89,36 @@ public class CustomerState extends StoreState{
     private Pane customerCostScreen(){
         Text totalCostText = new Text();
         totalCostText.setText("Total Cost: " + totalCost);
+        totalCostText.setStyle("-fx-font-weight: bold; -fx-text-inner-color: #4da8ab; -fx-font-size: 20px");
         
         Text pointsText = new Text();
         pointsText.setText("Points: " + customer.getPoints() 
-                + ", Status: " + customer.getStatus());
+                + ", Status: " + customer.getStatus() + "\n");
+        pointsText.setStyle("-fx-font-weight: bold; -fx-font-size: 20px");
         
         Button logoutButton = new Button();
         logoutButton.setText("Logout");
+        logoutButton.setStyle("-fx-text-fill: #4da8ab; -fx-background-radius: 20px");
+        logoutButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+        
+        // Animations - logout Button
+        logoutButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            logoutButton.setStyle("-fx-background-color: #4da8ab; -fx-text-fill: white; -fx-background-radius: 20px");
+            logoutButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+          }
+        });
+        
+        logoutButton.addEventHandler(MouseEvent.MOUSE_EXITED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            logoutButton.setStyle("-fx-text-fill: #4da8ab; -fx-background-radius: 20px");
+            logoutButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
+          }
+        });
         
         VBox root = new VBox(20);
         root.setAlignment(Pos.CENTER);
@@ -127,10 +152,24 @@ public class CustomerState extends StoreState{
     private Pane customerStartScreen(){
         Text welcomeText = new Text();
         welcomeText.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 18));
-        welcomeText.setText("Welcome " + customer.getName() 
+        welcomeText.setText("\nWelcome " + customer.getName() 
                 + ". You have " + customer.getPoints() + " points. "
-                + "Your status is " + customer.getStatus()
-        );
+                + "Your status is \n");
+        
+        Button status = new Button();
+        status.setDisable(true);
+        status.setText(customer.getStatus());
+        status.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 18));
+        status.setStyle("-fx-opacity: 1; -fx-background-radius: 12px; -fx-text-fill: black");
+        if(customer.getStatus().equals("Silver")){
+            status.setStyle("-fx-background-color: #cfd0d1; -fx-opacity: 1; -fx-background-radius: 12px; -fx-text-fill: black");
+        } else if(customer.getStatus().equals("Gold")){
+            status.setStyle("-fx-background-color: gold; -fx-opacity: 1; -fx-background-radius: 12px; -fx-text-fill: black");
+        }
+        
+        HBox message = new HBox();
+        message.getChildren().addAll(welcomeText, status);
+        message.setAlignment(Pos.CENTER);
         
         //table with three columns,
         // book name, book price, select.
@@ -162,6 +201,57 @@ public class CustomerState extends StoreState{
         
         Button logoutButton = new Button();
         logoutButton.setText("Logout");
+        
+        // Animations - buyWithPointsButton Button
+        buyWithPointsButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            buyWithPointsButton.setStyle("-fx-background-color: #4da8ab; -fx-font-weight: 900; -fx-text-fill: white");
+          }
+        });
+        
+        buyWithPointsButton.addEventHandler(MouseEvent.MOUSE_EXITED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            buyWithPointsButton.setStyle("-fx-text-fill: black");
+          }
+        });
+        
+        // Animations - buyButton Button
+        buyButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            buyButton.setStyle("-fx-background-color: #4da8ab; -fx-font-weight: 900; -fx-text-fill: white");
+          }
+        });
+        
+        buyButton.addEventHandler(MouseEvent.MOUSE_EXITED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            buyButton.setStyle("-fx-text-fill: black");
+          }
+        });
+
+        // Animations - Logout Button
+        logoutButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            logoutButton.setStyle("-fx-background-color: #4da8ab; -fx-font-weight: 900; -fx-text-fill: white");
+          }
+        });
+        
+        logoutButton.addEventHandler(MouseEvent.MOUSE_EXITED,
+        new EventHandler<MouseEvent>() {
+          @Override
+          public void handle(MouseEvent e) {
+            logoutButton.setStyle("-fx-text-fill: black");
+          }
+        });
 
         HBox buttons = new HBox(20);
         buttons.setAlignment(Pos.CENTER);
@@ -176,7 +266,7 @@ public class CustomerState extends StoreState{
         statuslabel.setTextAlignment(CENTER);
         
         VBox root = new VBox(10);
-        root.getChildren().add(welcomeText);
+        root.getChildren().add(message);
         root.getChildren().add(bookTable);
         root.getChildren().add(buttons);
         root.getChildren().add(statuslabel);

@@ -45,7 +45,7 @@ public class NoUserState extends StoreState {
         namelabel.setStyle("-fx-font-size: 14pt");
         TextField namefield = new TextField();
         namefield.setPrefColumnCount(20);
-        namefield.setPromptText("Enter your User Name");
+        namefield.setPromptText("Enter your Username");
         namefield.setStyle("-fx-font-size: 12pt;");
         usernamehbox.getChildren().addAll(namelabel, namefield);
         usernamehbox.setSpacing(20);

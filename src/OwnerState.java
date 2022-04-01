@@ -259,10 +259,12 @@ public class OwnerState extends StoreState{
         
         //Add customer part of windows
         Label namelabel = new Label ("Username");
+        namelabel.setStyle("-fx-font-weight: bold");
         TextField namefield = new TextField();
         namefield.setPromptText("New Customer's Username");
         namefield.setMinWidth(170);
         Label pwrdlabel = new Label ("Password");
+        pwrdlabel.setStyle("-fx-font-weight: bold");
         TextField passwordfield = new TextField();
         passwordfield.setPromptText("New Customer's Password");
         passwordfield.setMinWidth(170);
@@ -270,13 +272,12 @@ public class OwnerState extends StoreState{
         Button addcustomerButton = new Button();
         addcustomerButton.setText("Add");
         
-        // Animations - Back Button
+        // Animations - Add Button
         addcustomerButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent e) {
-            addcustomerButton.setFont(Font.font("Verdana",FontWeight.BOLD, 15));
-            addcustomerButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold");
+            addcustomerButton.setStyle("-fx-background-color: #4da8ab; -fx-font-weight: 900; -fx-text-fill: white");
           }
         });
         
@@ -284,9 +285,7 @@ public class OwnerState extends StoreState{
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent e) {
-            addcustomerButton.setMaxSize(250, 200);
-            addcustomerButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
-            addcustomerButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px");
+              addcustomerButton.setStyle("-fx-text-fill: black");
           }
         });
 
@@ -296,17 +295,14 @@ public class OwnerState extends StoreState{
         
         // Deleted Customer part of the table
         Button deleteCustomerButton = new Button("Delete");
-        deleteCustomerButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px");
         Button backButton = new Button("Back");
-        backButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px");
         
         // Animations - Back Button
         backButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
         new EventHandler<MouseEvent>() {
           @Override
-          public void handle(MouseEvent e) {
-            backButton.setFont(Font.font("Verdana",FontWeight.BOLD, 15));
-            backButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold");
+          public void handle(MouseEvent e) {;
+            backButton.setStyle("-fx-background-color: #4da8ab; -fx-font-weight: 900; -fx-text-fill: white");
           }
         });
         
@@ -314,9 +310,7 @@ public class OwnerState extends StoreState{
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent e) {
-            backButton.setMaxSize(250, 200);
-            backButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
-            backButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px");
+            backButton.setStyle("-fx-text-fill: black");
           }
         });
         
@@ -325,8 +319,7 @@ public class OwnerState extends StoreState{
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent e) {
-            deleteCustomerButton.setFont(Font.font("Verdana",FontWeight.BOLD, 15));
-            deleteCustomerButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold");
+            deleteCustomerButton.setStyle("-fx-background-color: #4da8ab; -fx-font-weight: 900; -fx-text-fill: white");
           }
         });
         
@@ -334,9 +327,7 @@ public class OwnerState extends StoreState{
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent e) {
-            deleteCustomerButton.setMaxSize(250, 200);
-            deleteCustomerButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
-            deleteCustomerButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px");
+            deleteCustomerButton.setStyle("-fx-text-fill: black");
           }
         });
         
@@ -422,10 +413,12 @@ public class OwnerState extends StoreState{
         
         //Add book part of windows
         Label namelabel = new Label ("Book Name");
+        namelabel.setStyle("-fx-font-weight: bold");
         TextField namefield = new TextField();
         namefield.setPromptText("New Book's Name");
         namefield.setMinWidth(270);
         Label pricelabel = new Label ("Book Price");
+        pricelabel.setStyle("-fx-font-weight: bold");
         TextField pricefield = new TextField();
         pricefield.setPromptText("New Book's Price");
         pricefield.setMinWidth(100);
@@ -438,8 +431,7 @@ public class OwnerState extends StoreState{
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent e) {
-            addbookButton.setFont(Font.font("Verdana",FontWeight.BOLD, 15));
-            addbookButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold");
+            addbookButton.setStyle("-fx-background-color: #4da8ab; -fx-font-weight: 900; -fx-text-fill: white");
           }
         });
         
@@ -447,9 +439,7 @@ public class OwnerState extends StoreState{
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent e) {
-            addbookButton.setMaxSize(250, 200);
-            addbookButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
-            addbookButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px");
+            addbookButton.setStyle("-fx-text-fill: black");
           }
         });
 
@@ -466,8 +456,7 @@ public class OwnerState extends StoreState{
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent e) {
-            backButton.setFont(Font.font("Verdana",FontWeight.BOLD, 15));
-            backButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold");
+            backButton.setStyle("-fx-background-color: #4da8ab; -fx-font-weight: 900; -fx-text-fill: white");
           }
         });
         
@@ -475,9 +464,7 @@ public class OwnerState extends StoreState{
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent e) {
-            backButton.setMaxSize(250, 200);
-            backButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
-            backButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px");
+            backButton.setStyle("-fx-text-fill: black");
           }
         });
         
@@ -486,18 +473,15 @@ public class OwnerState extends StoreState{
         new EventHandler<MouseEvent>() {
           @Override
           public void handle(MouseEvent e) {
-            deleteBookButton.setFont(Font.font("Verdana",FontWeight.BOLD, 15));
-            deleteBookButton.setStyle("-fx-text-fill: #4da8ab; -fx-font-weight: bold");
+            deleteBookButton.setStyle("-fx-background-color: #4da8ab; -fx-font-weight: 900; -fx-text-fill: white");
           }
         });
         
         deleteBookButton.addEventHandler(MouseEvent.MOUSE_EXITED,
         new EventHandler<MouseEvent>() {
           @Override
-          public void handle(MouseEvent e) {
-            deleteBookButton.setMaxSize(250, 200);
-            deleteBookButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
-            deleteBookButton.setStyle("-fx-text-fill: #000000; -fx-font-size: 12px");
+          public void handle(MouseEvent e) {;
+            deleteBookButton.setStyle("-fx-text-fill: black");
           }
         });
         
