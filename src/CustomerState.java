@@ -13,6 +13,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -183,6 +184,7 @@ public class CustomerState extends StoreState{
         
         TableColumn<BookListing,Integer> bookPriceCol = new TableColumn<>("Book Price");
         bookPriceCol.setCellValueFactory(new PropertyValueFactory("bookPrice"));
+        bookPriceCol.setStyle("-fx-alignment: CENTER");
         
         TableColumn<BookListing,Boolean> isSelectedCol = new TableColumn<>("Select");
         isSelectedCol.setCellValueFactory(new PropertyValueFactory("isSelected"));

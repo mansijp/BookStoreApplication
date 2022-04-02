@@ -22,9 +22,13 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
 import javafx.scene.text.FontWeight;
+import static javafx.scene.text.TextAlignment.CENTER;
 import javafx.util.Callback;
 
 public class OwnerState extends StoreState{
@@ -244,6 +248,7 @@ public class OwnerState extends StoreState{
                 return new ReadOnlyObjectWrapper(str.getValue().getPassword());
             }
         });
+        customerPassCol.setStyle("-fx-alignment: CENTER");
         
         TableColumn<Customer,Integer> customerPointsCol = new TableColumn<>("Points");
         customerPointsCol.setCellValueFactory(new PropertyValueFactory("customerPoints"));
@@ -252,6 +257,7 @@ public class OwnerState extends StoreState{
                 return new ReadOnlyObjectWrapper(str.getValue().getPoints());
             }
         });
+        customerPointsCol.setStyle("-fx-alignment: CENTER");
 
         customerTable.getColumns().setAll(customerNameCol, customerPassCol, customerPointsCol);
         customerTable.setEditable(true);
@@ -392,22 +398,23 @@ public class OwnerState extends StoreState{
         ObservableList<Book> books = FXCollections.observableArrayList(store.books);
         bookTable.setItems(books);
         
-        TableColumn<Book,String> customerNameCol = new TableColumn<>("Book Name");
-        customerNameCol.setCellValueFactory(new Callback<CellDataFeatures<Book, String>, ObservableValue<String>>(){
+        TableColumn<Book,String> bookNameCol = new TableColumn<>("Book Name");
+        bookNameCol.setCellValueFactory(new Callback<CellDataFeatures<Book, String>, ObservableValue<String>>(){
             public ObservableValue<String> call(CellDataFeatures<Book, String> str){
                 return new ReadOnlyObjectWrapper(str.getValue().getName());
             }
         });
         
-        TableColumn<Book,Integer> customerPointsCol = new TableColumn<>("Book Price");
-        customerPointsCol.setCellValueFactory(new PropertyValueFactory("bookPrice"));
-        customerPointsCol.setCellValueFactory(new Callback<CellDataFeatures<Book, Integer>, ObservableValue<Integer>>(){
+        TableColumn<Book,Integer> bookPriceCol = new TableColumn<>("Book Price");
+        bookPriceCol.setCellValueFactory(new PropertyValueFactory("bookPrice"));
+        bookPriceCol.setCellValueFactory(new Callback<CellDataFeatures<Book, Integer>, ObservableValue<Integer>>(){
             public ObservableValue<Integer> call(CellDataFeatures<Book, Integer> str){
                 return new ReadOnlyObjectWrapper(str.getValue().getPrice());
             }
         });
+        bookPriceCol.setStyle("-fx-alignment: CENTER");
 
-        bookTable.getColumns().setAll(customerNameCol,customerPointsCol);
+        bookTable.getColumns().setAll(bookNameCol,bookPriceCol);
         bookTable.setEditable(true);
         bookTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
@@ -446,6 +453,24 @@ public class OwnerState extends StoreState{
         HBox addCustomer = new HBox(20);
         addCustomer.setAlignment(Pos.CENTER);
         addCustomer.getChildren().addAll(namelabel, namefield, pricelabel, pricefield, addbookButton);
+        
+        Label statuslabel = new Label ("Please select a book.");
+        statuslabel.setVisible(false);
+        statuslabel.setFont(Font.font("Vardane",FontPosture.ITALIC, 12));
+        statuslabel.setTextFill(Color.web("red"));
+        statuslabel.setTextAlignment(CENTER);
+        
+        Label statuslabel2 = new Label ("Please enter the Name and Price of the book.");
+        statuslabel2.setVisible(false);
+        statuslabel2.setFont(Font.font("Vardane",FontPosture.ITALIC, 12));
+        statuslabel2.setTextFill(Color.web("red"));
+        statuslabel2.setTextAlignment(CENTER);
+        
+        StackPane messages = new StackPane();
+        messages.setPrefHeight(61);
+        messages.setAlignment(Pos.TOP_CENTER);
+        ObservableList list = messages.getChildren();
+        list.addAll(statuslabel,statuslabel2);
         
         // Deleted Book part of the table
         Button deleteBookButton = new Button("Delete");
@@ -492,7 +517,7 @@ public class OwnerState extends StoreState{
         buttons.getChildren().addAll(deleteBookButton, backButton);
         buttons.setAlignment(Pos.CENTER);
         
-        ownerCustomer.getChildren().add(buttons);
+        ownerCustomer.getChildren().addAll(buttons,messages);
         ownerCustomer.setAlignment(Pos.TOP_CENTER);
         
         backButton.setOnAction(event -> {
@@ -507,13 +532,18 @@ public class OwnerState extends StoreState{
         });
         
         addbookButton.setOnAction(event -> {
-            try{
-                Book book = new Book (namefield.getText(), Double.parseDouble(pricefield.getText()));    
-                addBook(store, book);
-                System.out.println("Book "+namefield.getText()+" Price "+pricefield.getText()+" added");
-            }catch(NumberFormatException e){
-                namefield.setText("");
-                pricefield.setText("");
+            if ((namefield.getText().length()== 0)||(pricefield.getText().length()==0)){
+                statuslabel2.setVisible(true);
+                statuslabel.setVisible(false);
+            } else {
+                try{
+                    Book book = new Book (namefield.getText(), Double.parseDouble(pricefield.getText()));    
+                    addBook(store, book);
+                    System.out.println("Book "+namefield.getText()+" Price "+pricefield.getText()+" added");
+                }catch(NumberFormatException e){
+                    namefield.setText("");
+                    pricefield.setText("");
+                }
             }
         });
         
@@ -527,10 +557,15 @@ public class OwnerState extends StoreState{
         });
         
         deleteBookButton.setOnAction(event -> {
-            Book book = bookTable.getSelectionModel().getSelectedItem();
-            books.remove(book);
-            removeBook(store, book.getName(), book.getPrice());
-            System.out.println("Deleted Book: " + book.getName() + " " + book.getPrice());
+            try{
+                Book book = bookTable.getSelectionModel().getSelectedItem();
+                books.remove(book);
+                removeBook(store, book.getName(), book.getPrice());
+                System.out.println("Deleted Book: " + book.getName() + " " + book.getPrice());
+            } catch(NullPointerException e){
+                statuslabel2.setVisible(false);
+                statuslabel.setVisible(true);
+            }
         });
         
         return ownerCustomer;
