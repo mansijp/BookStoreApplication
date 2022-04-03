@@ -333,8 +333,9 @@ public class CustomerState extends StoreState{
     
     private boolean booksSelected(){
         for(BookListing book : books){
-            if(book.isSelectedProperty().get())
+            if(book.isSelectedProperty().get()){
                 return true;
+            }
         }
         return false;
     }

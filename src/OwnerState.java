@@ -240,7 +240,6 @@ public class OwnerState extends StoreState{
         });
         
         TableColumn<Customer,String> customerPassCol = new TableColumn<>("Password");
-        //customerPassCol.setCellValueFactory(new PropertyValueFactory("customerPassword"));
         customerPassCol.setCellValueFactory(new Callback<CellDataFeatures<Customer, String>, ObservableValue<String>>(){
             public ObservableValue<String> call(CellDataFeatures<Customer, String> str){
                 return new ReadOnlyObjectWrapper(str.getValue().getPassword());
