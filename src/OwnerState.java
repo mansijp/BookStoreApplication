@@ -408,15 +408,20 @@ public class OwnerState extends StoreState{
             }
         });
         
-//        deleteCustomerButton.setOnKeyPressed(event -> {
-//            KeyCode key = event.getCode();
-//                if(key.equals(KeyCode.ENTER)){
-//                   Customer customer = customerTable.getSelectionModel().getSelectedItem();
-//                    customers.remove(customer);
-//                    deleteCustomer(store, customer.getName(), customer.getPassword());
-//                    System.out.println("Deleted "+customer.getName() + " " + customer.getPassword());
-//                }
-//        });
+        deleteCustomerButton.setOnKeyPressed(event -> {
+            KeyCode key = event.getCode();
+                if(key.equals(KeyCode.ENTER)){
+                    try{   
+                        Customer customer = customerTable.getSelectionModel().getSelectedItem();
+                        customers.remove(customer);
+                        deleteCustomer(store, customer.getName(), customer.getPassword());
+                        System.out.println("Deleted "+customer.getName() + " " + customer.getPassword());
+                    } catch (NullPointerException e){
+                        statuslabel.setVisible(true);  
+                        statuslabel2.setVisible(false);
+                    }
+                }
+        });
         
         return ownerCustomer;
     }
