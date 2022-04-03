@@ -189,7 +189,6 @@ public class CustomerState extends StoreState{
         TableColumn<BookListing,Boolean> isSelectedCol = new TableColumn<>("Select");
         isSelectedCol.setCellValueFactory(new PropertyValueFactory("isSelected"));
         isSelectedCol.setCellFactory(column -> new CheckBoxTableCell());
-
         bookTable.getColumns().setAll(bookNameCol, bookPriceCol, isSelectedCol);
         bookTable.setEditable(true);
         bookTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
@@ -197,12 +196,15 @@ public class CustomerState extends StoreState{
         // three buttons: buy, reedem points and buy, and logout
         Button buyButton = new Button();
         buyButton.setText("Buy");
+        buyButton.setFocusTraversable(true);
         
         Button buyWithPointsButton = new Button();
         buyWithPointsButton.setText("Redeem points and Buy");
+        buyWithPointsButton.setFocusTraversable(true);
         
         Button logoutButton = new Button();
         logoutButton.setText("Logout");
+        logoutButton.setFocusTraversable(true);
         
         // Animations - buyWithPointsButton Button
         buyWithPointsButton.addEventHandler(MouseEvent.MOUSE_ENTERED,

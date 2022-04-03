@@ -1,13 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
-/**
- *
- * @author Cyrille
- */
 
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.value.ObservableValue;
@@ -57,12 +48,14 @@ public class OwnerState extends StoreState{
     private void removeBook(Store store, String bookname, double bookprice){
         Book bookToDelete = null;
         for (Book book:store.books){
-            if ((book.getName().equals(bookname)) && (book.getPrice() == bookprice))
+            if ((book.getName().equals(bookname)) && (book.getPrice() == bookprice)){
                 bookToDelete = book;
+            }
         }
         
-        if(bookToDelete != null)
+        if(bookToDelete != null){
             store.books.remove(bookToDelete);
+        }
     }
     
     private void registerNewCustomer(Store store, String name, String password) {
@@ -72,7 +65,7 @@ public class OwnerState extends StoreState{
         int i = 0;
         while (found==false && (i < size)) {
             Customer cst = store.customers.get(i);
-            if ((cst.getName().equals(name)) && (cst.getPassword().equals(password))) {
+            if (cst.getName().equals(name)) {
                 found = true;
                 System.out.println("Customer already in Store Customers list");
             }
@@ -87,12 +80,14 @@ public class OwnerState extends StoreState{
     private void deleteCustomer(Store store, String name, String password){
         Customer customerToDelete = null;
         for (Customer customer:store.customers){
-            if ((customer.getName().equals(name)) && (customer.getPassword().equals(password)))
+            if ((customer.getName().equals(name)) && (customer.getPassword().equals(password))){
                 customerToDelete = customer;
+            }
         }
         
-        if(customerToDelete != null)
+        if(customerToDelete != null){
             store.customers.remove(customerToDelete);
+        }
     }
     
     private Pane ownerStartScreen(){
@@ -101,17 +96,19 @@ public class OwnerState extends StoreState{
         booksButton.setText("Books");
         booksButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
         booksButton.setMinSize(250, 30);
+        booksButton.setFocusTraversable(true);
         
         Button customersButton = new Button();
         customersButton.setText("Customers");
         customersButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
         customersButton.setMinSize(250, 30);
+        customersButton.setFocusTraversable(true);
         
         Button logoutButton = new Button();
         logoutButton.setText("Logout");
         logoutButton.setFont(Font.font("Verdana",FontWeight.BOLD, 20));
         logoutButton.setMinSize(250, 30);
-        logoutButton.setFocusTraversable(false);
+        logoutButton.setFocusTraversable(true);
 
         VBox ownerstart = new VBox(20);
         ownerstart.setAlignment(Pos.CENTER);
@@ -120,41 +117,7 @@ public class OwnerState extends StoreState{
         ownerstart.getChildren().add(customersButton);
         ownerstart.getChildren().add(logoutButton);
         
-        //Button functionality
-        customersButton.setOnAction(event -> {
-            store.changeScreen(ownerCustomerScreen(store));
-        });
-        
-        customersButton.setOnKeyPressed(event -> {
-            KeyCode key = event.getCode();
-                if(key.equals(KeyCode.ENTER)){
-                    store.changeScreen(ownerCustomerScreen(store));
-                }
-        });
-        
-        booksButton.setOnAction(event -> {
-            store.changeScreen(ownerBooksScreen(store));
-        });
-        
-        booksButton.setOnKeyPressed(event -> {
-            KeyCode key = event.getCode();
-                if(key.equals(KeyCode.ENTER)){
-                    store.changeScreen(ownerBooksScreen(store));
-                }
-        });
-                
-        logoutButton.setOnAction(event -> {
-            logOut(store);
-        });
-        
-        logoutButton.setOnKeyPressed(event -> {
-            KeyCode key = event.getCode();
-                if(key.equals(KeyCode.ENTER)){
-                    event.consume();
-                    logOut(store);
-                }
-        });
-        
+            
         // Animations - Books Button
         booksButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
         new EventHandler<MouseEvent>() {
@@ -221,6 +184,41 @@ public class OwnerState extends StoreState{
           }
         });
         
+        //Button functionality
+        customersButton.setOnAction(event -> {
+            store.changeScreen(ownerCustomerScreen(store));
+        });
+        
+        customersButton.setOnKeyPressed(event -> {
+            KeyCode key = event.getCode();
+                if(key.equals(KeyCode.ENTER)){
+                    store.changeScreen(ownerCustomerScreen(store));
+                }
+        });
+        
+        booksButton.setOnAction(event -> {
+            store.changeScreen(ownerBooksScreen(store));
+        });
+        
+        booksButton.setOnKeyPressed(event -> {
+            KeyCode key = event.getCode();
+                if(key.equals(KeyCode.ENTER)){
+                    store.changeScreen(ownerBooksScreen(store));
+                }
+        });
+                
+        logoutButton.setOnAction(event -> {
+            logOut(store);
+        });
+        
+        logoutButton.setOnKeyPressed(event -> {
+            KeyCode key = event.getCode();
+                if(key.equals(KeyCode.SPACE)){
+                    event.consume();
+                    logOut(store);
+                }
+        });
+        
         return ownerstart;
     }
     
@@ -269,39 +267,73 @@ public class OwnerState extends StoreState{
         TextField namefield = new TextField();
         namefield.setPromptText("New Customer's Username");
         namefield.setMinWidth(170);
+        namefield.setFocusTraversable(true);
+        
         Label pwrdlabel = new Label ("Password");
         pwrdlabel.setStyle("-fx-font-weight: bold");
         TextField passwordfield = new TextField();
         passwordfield.setPromptText("New Customer's Password");
         passwordfield.setMinWidth(170);
+        passwordfield.setFocusTraversable(true);
         
         Button addcustomerButton = new Button();
         addcustomerButton.setText("Add");
+        addcustomerButton.setFocusTraversable(true);
         
-        // Animations - Add Button
-        addcustomerButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
-        new EventHandler<MouseEvent>() {
-          @Override
-          public void handle(MouseEvent e) {
-            addcustomerButton.setStyle("-fx-background-color: #4da8ab; -fx-font-weight: 900; -fx-text-fill: white");
-          }
-        });
-        
-        addcustomerButton.addEventHandler(MouseEvent.MOUSE_EXITED,
-        new EventHandler<MouseEvent>() {
-          @Override
-          public void handle(MouseEvent e) {
-              addcustomerButton.setStyle("-fx-text-fill: black");
-          }
-        });
+            // Animations - Add Button
+            addcustomerButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
+            new EventHandler<MouseEvent>() {
+              @Override
+              public void handle(MouseEvent e) {
+                addcustomerButton.setStyle("-fx-background-color: #4da8ab; -fx-font-weight: 900; -fx-text-fill: white");
+              }
+            });
+
+            addcustomerButton.addEventHandler(MouseEvent.MOUSE_EXITED,
+            new EventHandler<MouseEvent>() {
+              @Override
+              public void handle(MouseEvent e) {
+                  addcustomerButton.setStyle("-fx-text-fill: black");
+              }
+            });
 
         HBox addCustomer = new HBox(20);
         addCustomer.setAlignment(Pos.CENTER);
         addCustomer.getChildren().addAll(namelabel, namefield,pwrdlabel,passwordfield,addcustomerButton);
         
+        Label statuslabel = new Label ("Please select the customer to be deleted.");
+        statuslabel.setVisible(false);
+        statuslabel.setFont(Font.font("Vardane",FontPosture.ITALIC, 12));
+        statuslabel.setTextFill(Color.web("red"));
+        statuslabel.setTextAlignment(CENTER);
+        
+        Label statuslabel2 = new Label ("Please enter the Name and Password of the customer to add.");
+        statuslabel2.setVisible(false);
+        statuslabel2.setFont(Font.font("Vardane",FontPosture.ITALIC, 12));
+        statuslabel2.setTextFill(Color.web("red"));
+        statuslabel2.setTextAlignment(CENTER);
+        
+        StackPane messages = new StackPane();
+        messages.setPrefHeight(61);
+        messages.setAlignment(Pos.TOP_CENTER);
+        ObservableList list = messages.getChildren();
+        list.addAll(statuslabel,statuslabel2);
+        
         // Deleted Customer part of the table
         Button deleteCustomerButton = new Button("Delete");
+        deleteCustomerButton.setFocusTraversable(true);
         Button backButton = new Button("Back");
+        backButton.setFocusTraversable(true);
+        
+        VBox ownerCustomer = new VBox(10);
+        ownerCustomer.getChildren().add(customerTable);
+        ownerCustomer.getChildren().add(addCustomer);
+        HBox buttons = new HBox(10);
+        buttons.getChildren().addAll(deleteCustomerButton, backButton);
+        buttons.setAlignment(Pos.CENTER);
+        
+        ownerCustomer.getChildren().addAll(buttons, messages);
+        ownerCustomer.setAlignment(Pos.TOP_CENTER);
         
         // Animations - Back Button
         backButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
@@ -337,16 +369,6 @@ public class OwnerState extends StoreState{
           }
         });
         
-        VBox ownerCustomer = new VBox(10);
-        ownerCustomer.getChildren().add(customerTable);
-        ownerCustomer.getChildren().add(addCustomer);
-        HBox buttons = new HBox(10);
-        buttons.getChildren().addAll(deleteCustomerButton, backButton);
-        buttons.setAlignment(Pos.CENTER);
-        
-        ownerCustomer.getChildren().add(buttons);
-        ownerCustomer.setAlignment(Pos.TOP_CENTER);
-        
         backButton.setOnAction(event -> {
             store.changeScreen(ownerStartScreen());
         });
@@ -359,7 +381,12 @@ public class OwnerState extends StoreState{
         });
         
         addcustomerButton.setOnAction(event -> {
-            registerNewCustomer(store, namefield.getText(), passwordfield.getText());
+            if((namefield.getText().length()==0)||(passwordfield.getText().length()==0)){
+                statuslabel2.setVisible(true);
+                statuslabel.setVisible(false);
+            }else {
+                registerNewCustomer(store, namefield.getText(), passwordfield.getText());
+            }
         });
         
         addcustomerButton.setOnKeyPressed(event -> {
@@ -370,10 +397,15 @@ public class OwnerState extends StoreState{
         });
         
         deleteCustomerButton.setOnAction(event -> {
-            Customer customer = customerTable.getSelectionModel().getSelectedItem();
-            customers.remove(customer);
-            deleteCustomer(store, customer.getName(), customer.getPassword());
-            System.out.println("Deleted "+customer.getName() + " " + customer.getPassword());
+            try{   
+                Customer customer = customerTable.getSelectionModel().getSelectedItem();
+                customers.remove(customer);
+                deleteCustomer(store, customer.getName(), customer.getPassword());
+                System.out.println("Deleted "+customer.getName() + " " + customer.getPassword());
+            } catch (NullPointerException e){
+                statuslabel.setVisible(true);  
+                statuslabel2.setVisible(false);
+            }
         });
         
 //        deleteCustomerButton.setOnKeyPressed(event -> {
@@ -424,14 +456,17 @@ public class OwnerState extends StoreState{
         TextField namefield = new TextField();
         namefield.setPromptText("New Book's Name");
         namefield.setMinWidth(270);
+        namefield.setFocusTraversable(true);
         Label pricelabel = new Label ("Book Price");
         pricelabel.setStyle("-fx-font-weight: bold");
         TextField pricefield = new TextField();
         pricefield.setPromptText("New Book's Price");
         pricefield.setMinWidth(100);
+        pricefield.setFocusTraversable(true);
 
         Button addbookButton = new Button();
         addbookButton.setText("Add");
+        addbookButton.setFocusTraversable(true);
         
         // Animations - Add Button
         addbookButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
@@ -474,7 +509,9 @@ public class OwnerState extends StoreState{
         
         // Deleted Book part of the table
         Button deleteBookButton = new Button("Delete");
+        deleteBookButton.setFocusTraversable(true);
         Button backButton = new Button("Back");
+        backButton.setFocusTraversable(true);
         
         // Animations - Back Button
         backButton.addEventHandler(MouseEvent.MOUSE_ENTERED,
